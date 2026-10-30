@@ -1,0 +1,21 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "default_agent": "orchestrator",
+  "instructions": [
+    "./instructions/secrets-and-verification.md",
+    "./instructions/remote-ssh.md",
+    "./instructions/git-workflow.md"
+  ],
+  "plugins": [
+    "@vasilvestre/opencode-plain-style",
+    "@vasilvestre/opencode-dream-memory",
+    "@vasilvestre/opencode-comment-checker"
+  ],
+  "permissions": [
+    { "action": "shell", "resource": "*", "effect": "allow" },
+    { "action": "shell", "resource": "git push", "effect": "ask" },
+    { "action": "shell", "resource": "git push *", "effect": "ask" },
+    { "action": "shell", "resource": "npm publish *", "effect": "ask" },
+    { "action": "shell", "resource": "sudo *", "effect": "ask" }
+  ]
+}
