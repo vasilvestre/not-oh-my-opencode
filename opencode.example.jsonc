@@ -11,7 +11,9 @@
     "@vasilvestre/opencode-plain-style",
     "@vasilvestre/opencode-dream-memory",
     "@vasilvestre/opencode-comment-checker",
-    "@vasilvestre/opencode-tool-guard"
+    "@vasilvestre/opencode-tool-guard",
+    "@vasilvestre/opencode-todo-enforcer",
+    "@vasilvestre/opencode-provider-tuning"
   ],
   "permissions": [
     { "action": "shell", "resource": "*", "effect": "allow" },

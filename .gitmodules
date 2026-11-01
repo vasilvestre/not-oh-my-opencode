@@ -13,3 +13,9 @@
 [submodule "plugins/opencode-tool-guard"]
 	path = plugins/opencode-tool-guard
 	url = https://github.com/vasilvestre/opencode-tool-guard.git
+[submodule "plugins/opencode-todo-enforcer"]
+	path = plugins/opencode-todo-enforcer
+	url = https://github.com/vasilvestre/opencode-todo-enforcer.git
+[submodule "plugins/opencode-provider-tuning"]
+	path = plugins/opencode-provider-tuning
+	url = https://github.com/vasilvestre/opencode-provider-tuning.git

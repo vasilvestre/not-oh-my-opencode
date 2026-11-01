@@ -2,7 +2,7 @@
 
 A harness on a harness, built for OpenCode v2, that works.
 
-The five plugins live here as Git submodules, under `plugins/`. Each one still publishes alone on npm. `install.mjs` links the submodules into your OpenCode config directory, so you can run the latest code without waiting for a release.
+The six plugins live here as Git submodules, under `plugins/`. Each one still publishes alone on npm. `install.mjs` links the submodules into your OpenCode config directory, so you can run the latest code without waiting for a release.
 
 The script writes only inside your config directory. It never edits `opencode.jsonc` and never touches your own agents.
 
@@ -27,6 +27,8 @@ Each is an npm package you add to `plugins` in `opencode.jsonc`.
 | [`@vasilvestre/opencode-comment-checker`](https://github.com/vasilvestre/opencode-comment-checker) | Flags comments that add nothing after an edit | published |
 | [`@vasilvestre/opencode-hashline-edit`](https://github.com/vasilvestre/opencode-hashline-edit) | `LINE#ID` anchors that reject stale edits | published |
 | [`@vasilvestre/opencode-tool-guard`](https://github.com/vasilvestre/opencode-tool-guard) | Escalates `rm -rf`, `git push --force`, `DROP TABLE` and `chmod 777` from allow to ask | local |
+| [`@vasilvestre/opencode-todo-enforcer`](https://github.com/vasilvestre/opencode-todo-enforcer) | Resumes an idle session while its todos are still open | local |
+| [`@vasilvestre/opencode-provider-tuning`](https://github.com/vasilvestre/opencode-provider-tuning) | Longer wait on a rate limit, capped auxiliary tokens, optional local titles | local |
 
 ### Agents, commands, instructions
 
