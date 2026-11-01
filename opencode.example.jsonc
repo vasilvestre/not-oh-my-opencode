@@ -7,6 +7,8 @@
     "./instructions/workspace-hygiene.md",
     "./instructions/git-workflow.md"
   ],
+  // The last three are not on npm yet. Install them from a cloned submodule
+  // with `node install.mjs`, which links them into the config directory.
   "plugins": [
     "@vasilvestre/opencode-plain-style",
     "@vasilvestre/opencode-dream-memory",
