@@ -4,8 +4,9 @@ Instructions for agents working in this repository.
 
 ## What this repo ships
 
-A **showcase**, not an installer. It holds the files that cannot be published as
-npm packages, and points at the packages that can.
+A **showcase with its plugins as submodules**, not an installer. It holds the
+files that cannot be published as npm packages, links the packages that can,
+and points at them.
 
 | Path | Role |
 | --- | --- |
@@ -13,6 +14,8 @@ npm packages, and points at the packages that can.
 | `commands/` | 8 slash commands |
 | `instructions/` | 4 instruction files |
 | `opencode.example.jsonc` | a complete config, valid JSON |
+| `plugins/` | 4 Git submodules, one per published npm package |
+| `install.mjs` | links the submodules into a config directory |
 | `check.mjs` | refuses personal paths, secrets, and agents without a description |
 
 ## Hard rules
@@ -22,9 +25,14 @@ npm packages, and points at the packages that can.
   keeping a matrix of provider chains current is the failure mode this project
   exists to avoid. A user who wants a cheap search agent pins that one agent
   locally.
-- **No install script.** Copying files into `~/.config/opencode/` is the user's
-  decision. A script that rewrites their config is exactly what this project
-  refuses to do.
+- **No install script that rewrites your config.** `install.mjs` links the
+  submodules into the config directory and prints the lines to add. It never
+  edits `opencode.jsonc`, never copies agents over yours, and `--dry-run` shows
+  every action first. A script that rewrites the config is exactly what this
+  project refuses to do.
+- **The submodules stay submodules.** Each plugin keeps its own repository,
+  its own history, and its own npm release. Do not move their code into this
+  repository.
 - **No secrets, no personal paths.** `check.mjs` fails the build on `/home/<user>`,
   bearer tokens, API keys, and private keys. It also fails when an agent has no
   `description`, because OpenCode cannot offer an agent without one.
