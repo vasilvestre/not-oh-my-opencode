@@ -114,6 +114,35 @@ Nothing to publish here. Each plugin publishes from its own CI when its
 | `@vasilvestre/opencode-comment-checker` | `vasilvestre/opencode-comment-checker` |
 | `@vasilvestre/opencode-hashline-edit` | `vasilvestre/opencode-hashline-edit` |
 
+The user granted standing autonomy on 2026-11-01: push, tag, build, and
+release without asking each time. Keep the safety rails below; they replace
+the per-action question.
+
+### Release a plugin
+
+Run this inside `plugins/<name>`. The `Release` workflow publishes only when
+the `package.json` version is absent from npm, so the bump is the trigger.
+
+```bash
+npm test && npx tsc --noEmit          # the same checks CI runs
+npm version patch --no-git-tag-version # or minor/major
+git add -A && git commit -m "chore: release X.Y.Z"
+git push origin main
+gh run watch                          # wait for CI and Release to pass
+npm view @vasilvestre/<name> version  # must print the new version
+```
+
+Rules that stay:
+
+- Never publish a version already on npm. Bump first, push second.
+- `plugins/opencode-hashline-edit/dist/` is committed. Rebuild it with
+  `npx tsc` and commit the output in the same commit as the source change.
+- After a plugin release, bump the submodule pointer here and update the
+  version in `plugins/README.md` and the root `README.md` table.
+- A failed Release run on npm is not retryable with the same version. Bump
+  again. npm keeps the failed version number.
+- Never `git push --force` on `main`, in any of the five repositories.
+
 ## Commits
 
 Imperative subject, 72 characters or fewer, no trailing period. Say what
