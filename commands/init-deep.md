@@ -64,12 +64,15 @@ question, and give each one the repository root:
 Add one agent per 100 source files beyond the first 100, and one per workspace
 when the repository is a monorepo. Do not spawn a fixed number.
 
-When `sg` (ast-grep) is on `PATH`, use it to count exports and imports, which
-feeds the export and centrality scores below:
+When `ast-grep` is on `PATH`, use it to count exports and imports, which feeds
+the export and centrality scores below. The `sg` alias still works but prints a
+deprecation warning on every call.
 
 ```bash
-sg --pattern 'export $$$' --lang ts | wc -l
-sg --pattern 'import $$$ from "$MOD"' --lang ts
+# An export pattern must match one whole declaration. `export $$$` fails to parse.
+ast-grep --pattern 'export function $F($$$) { $$$ }' --lang ts .
+ast-grep --pattern 'export class $C { $$$ }' --lang ts .
+ast-grep --pattern 'import $A from "$MOD"' --lang ts .
 ```
 
 Do not rely on LSP. OpenCode v2 accepts the `lsp` config key but runs no

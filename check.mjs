@@ -30,7 +30,8 @@ for (const rel of files) {
 }
 
 // Every agent must declare a description, or OpenCode cannot offer it.
-const agents = fs.readdirSync(path.join(ROOT, 'agents'))
+// README.md documents the folder and is not an agent.
+const agents = fs.readdirSync(path.join(ROOT, 'agents')).filter((f) => f.endsWith('.md') && f !== 'README.md')
 for (const file of agents) {
   const text = fs.readFileSync(path.join(ROOT, 'agents', file), 'utf8')
   assert.match(text, /^---\n[\s\S]*?description:/m, `${file} has no description`)

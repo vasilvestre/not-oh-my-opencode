@@ -34,7 +34,7 @@ These are files, not packages. OpenCode reads them from your config directory, s
 ```
 agents/        11 agents (orchestrator, explore, librarian, reviewer, ...)
 commands/      9 slash commands
-instructions/  4 instruction files (secrets, remote SSH, Atlassian, git)
+instructions/  5 instruction files (secrets, remote SSH, workspace hygiene, Atlassian, git)
 ```
 
 ## Install from this repository
@@ -82,13 +82,27 @@ Or in `opencode.jsonc`:
 
 ## Install the files
 
-`install.mjs` prints these commands. They copy agents, commands, and instructions into your OpenCode config directory. Copy only what you want.
+`install.mjs` prints these commands. They copy agents, commands, and
+instructions into your OpenCode config directory. Copy only what you want.
 
-```sh
+```bash
+mkdir -p ~/.config/opencode/{agents,commands,instructions}
 cp agents/*.md ~/.config/opencode/agents/
 cp commands/*.md ~/.config/opencode/commands/
 cp instructions/*.md ~/.config/opencode/instructions/
 ```
+
+Each folder has its own README with the details:
+
+| Folder | README |
+| --- | --- |
+| `agents/` | [agents/README.md](agents/README.md) |
+| `commands/` | [commands/README.md](commands/README.md) |
+| `instructions/` | [instructions/README.md](instructions/README.md) |
+| `plugins/` | [plugins/README.md](plugins/README.md) |
+
+The `mkdir -p` line is not optional: `cp` fails when the target folder does not
+exist, and OpenCode does not create it for you.
 
 Then reference the instruction files in `opencode.jsonc`:
 
@@ -96,10 +110,14 @@ Then reference the instruction files in `opencode.jsonc`:
 {
   "instructions": [
     "./instructions/secrets-and-verification.md",
-    "./instructions/remote-ssh.md"
+    "./instructions/remote-ssh.md",
+    "./instructions/workspace-hygiene.md"
   ]
 }
 ```
+
+`workspace-hygiene.md` keeps scratch files out of the project root. Notes,
+summaries and memory files go to `.omo/`, which stays out of version control.
 
 ## Models
 
@@ -148,7 +166,7 @@ Honest list, so you know what you give up by leaving oh-my-openagent:
 - **Team mode**: parallel agents with a shared task list and tmux panes.
 - **Background agents**: fire-and-forget subagents with a result queue.
 - **Prometheus interview planning**: a dedicated planner that interviews you.
-- **LSP tools**: OpenCode v2 accepts the `lsp` config key but runs no language server, so it exposes no `lsp_*` tool and reports no diagnostics. AST-grep is a plain binary, so `commands/init-deep.md` uses it when `sg` is installed.
+- **LSP tools**: OpenCode v2 accepts the `lsp` config key but runs no language server, so it exposes no `lsp_*` tool and reports no diagnostics. AST-grep is a plain binary, so `commands/init-deep.md` uses it when `ast-grep` is installed.
 - **Claude Code compatibility**: hooks, commands, and plugins from Claude Code.
 - **Goal and todo enforcement**: re-injecting a continuation prompt when the agent goes idle.
 

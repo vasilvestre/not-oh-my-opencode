@@ -5,7 +5,7 @@
 
 ## OVERVIEW
 
-A showcase of OpenCode v2 bricks: 11 agents, 9 commands, 4 instruction files,
+A showcase of OpenCode v2 bricks: 11 agents, 9 commands, 5 instruction files,
 and 4 plugins kept as Git submodules. It holds the files that cannot ship as
 npm packages, links the packages that can, and points at them.
 
@@ -15,7 +15,7 @@ npm packages, links the packages that can, and points at them.
 .
 ├── agents/            11 agents, plain Markdown with YAML frontmatter
 ├── commands/          9 slash commands
-├── instructions/      4 rule files, loaded through opencode.jsonc
+├── instructions/      5 rule files, loaded through opencode.jsonc
 ├── plugins/           4 Git submodules, one per published npm package
 ├── install.mjs        links the submodules into a config directory
 ├── check.mjs          the only test in the repository
@@ -29,6 +29,8 @@ npm packages, links the packages that can, and points at them.
 | Add or change an agent | `agents/*.md` | Frontmatter needs a `description`, and no `model` |
 | Add a slash command | `commands/*.md` | Frontmatter: `description`, optional `agent` or `model` |
 | Add a rule every session reads | `instructions/*.md` | Then list it under `instructions` in the config |
+| Read a folder's install steps | `*/README.md` | One per folder, linked from the root README |
+| Maintain the root README | `commands/maintain-readme.md` | The `/maintain-readme` command |
 | Change what the installer does | `install.mjs` | It writes only inside the config directory |
 | Change a plugin | Its own repository | The submodule stays a submodule |
 | See the commit style | `git log -n 5` | Conventional Commits, see `instructions/git-workflow.md` |
@@ -36,7 +38,7 @@ npm packages, links the packages that can, and points at them.
 ## CONVENTIONS
 
 - Commits follow Conventional Commits: `feat:`, `fix:`, `docs:`, `chore:`.
-  The four commits in the history all do.
+  Every commit in the history does.
 - Prose in `README.md`, `AGENTS.md`, and `commands/` is plain English, short
   lines, no em dashes. Code comments explain why, not what.
 - An agent declares `mode: primary` or `mode: subagent`. Nine of the eleven
@@ -89,13 +91,17 @@ is the whole test suite.
   creates symlinks inside the config directory. `opencode.example.jsonc` lists
   the npm package names instead. Both forms work; do not mix them.
 - The example config loads `instructions/git-workflow.md`, but `install.mjs`
-  prints only `secrets-and-verification.md` and `remote-ssh.md`.
-- Two commands name an `agent` that does not exist here: `readme.md` uses
-  `tools/doc`, `dream.md` uses `plan`. They fall back to the default agent.
+  prints only `secrets-and-verification.md`, `remote-ssh.md`, and
+  `workspace-hygiene.md`.
+- Two commands name an `agent` that does not exist here: `maintain-readme.md`
+  uses `tools/doc`, `dream.md` uses `plan`. They fall back to the default agent.
 - `plugins/opencode-hashline-edit/dist/` is build output committed in the
   submodule. Do not edit it; rebuild it.
 - OpenCode v2 accepts the `lsp` config key but runs no language server. No
   `lsp_*` tool exists, so a command must shell out to a binary instead.
+- Each folder has a `README.md` with its install step. `install.mjs` lists
+  only directories under `plugins/`, and `check.mjs` skips `agents/README.md`,
+  because a README is not a plugin nor an agent.
 
 ## Release
 

@@ -4,6 +4,7 @@
   "instructions": [
     "./instructions/secrets-and-verification.md",
     "./instructions/remote-ssh.md",
+    "./instructions/workspace-hygiene.md",
     "./instructions/git-workflow.md"
   ],
   "plugins": [

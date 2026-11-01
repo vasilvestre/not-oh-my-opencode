@@ -18,11 +18,15 @@ const pluginsDir = path.join(config, 'plugins')
 
 
 // Each plugin is a submodule with a package.json entry point.
-const plugins = fs.readdirSync(path.join(ROOT, 'plugins')).map((name) => {
-  const dir = path.join(ROOT, 'plugins', name)
-  const pkg = JSON.parse(fs.readFileSync(path.join(dir, 'package.json'), 'utf8'))
-  return { name, dir, pkg, entry: path.join(dir, pkg.main) }
-})
+const plugins = fs
+  .readdirSync(path.join(ROOT, 'plugins'), { withFileTypes: true })
+  .filter((e) => e.isDirectory())
+  .map((e) => {
+    const name = e.name
+    const dir = path.join(ROOT, 'plugins', name)
+    const pkg = JSON.parse(fs.readFileSync(path.join(dir, 'package.json'), 'utf8'))
+    return { name, dir, pkg, entry: path.join(dir, pkg.main) }
+  })
 
 // A TypeScript plugin needs its build output before OpenCode can load it.
 const unbuilt = plugins.filter((p) => p.pkg.scripts?.build && !fs.existsSync(p.entry))
@@ -51,9 +55,11 @@ ${names.map((n) => `    "./plugins/${n}"`).join(',\n')}
   ],
   "instructions": [
     "${path.join(ROOT, 'instructions/secrets-and-verification.md')}",
-    "${path.join(ROOT, 'instructions/remote-ssh.md')}"
+    "${path.join(ROOT, 'instructions/remote-ssh.md')}",
+    "${path.join(ROOT, 'instructions/workspace-hygiene.md')}"
   ]
 
 Copy the agents and commands you want:
+  mkdir -p ${path.join(config, 'agents')} ${path.join(config, 'commands')}
   cp ${ROOT}/agents/*.md ${path.join(config, 'agents')}/
   cp ${ROOT}/commands/*.md ${path.join(config, 'commands')}/`)
