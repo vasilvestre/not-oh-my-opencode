@@ -1,62 +1,106 @@
-# AGENTS.md — maintainer instructions
+# PROJECT KNOWLEDGE BASE
 
-Instructions for agents working in this repository.
+**Generated:** 2026-11-01
+**Commit:** 432d79d
 
-## What this repo ships
+## OVERVIEW
 
-A **showcase with its plugins as submodules**, not an installer. It holds the
-files that cannot be published as npm packages, links the packages that can,
-and points at them.
+A showcase of OpenCode v2 bricks: 11 agents, 9 commands, 4 instruction files,
+and 4 plugins kept as Git submodules. It holds the files that cannot ship as
+npm packages, links the packages that can, and points at them.
 
-| Path | Role |
-| --- | --- |
-| `agents/` | 11 OpenCode agents |
-| `commands/` | 8 slash commands |
-| `instructions/` | 4 instruction files |
-| `opencode.example.jsonc` | a complete config, valid JSON |
-| `plugins/` | 4 Git submodules, one per published npm package |
-| `install.mjs` | links the submodules into a config directory |
-| `check.mjs` | refuses personal paths, secrets, and agents without a description |
+## STRUCTURE
 
-## Hard rules
-
-- **No agent names a model.** Every agent inherits the model of the session that
-  runs it. A pinned model goes stale when a provider renames or retires it, and
-  keeping a matrix of provider chains current is the failure mode this project
-  exists to avoid. A user who wants a cheap search agent pins that one agent
-  locally.
-- **No install script that rewrites your config.** `install.mjs` links the
-  submodules into the config directory and prints the lines to add. It never
-  edits `opencode.jsonc`, never copies agents over yours, and `--dry-run` shows
-  every action first. A script that rewrites the config is exactly what this
-  project refuses to do.
-- **The submodules stay submodules.** Each plugin keeps its own repository,
-  its own history, and its own npm release. Do not move their code into this
-  repository.
-- **No secrets, no personal paths.** `check.mjs` fails the build on `/home/<user>`,
-  bearer tokens, API keys, and private keys. It also fails when an agent has no
-  `description`, because OpenCode cannot offer an agent without one.
-- **The README states what is not replaced.** Team mode, background agents,
-  Prometheus planning, LSP tools, `/init-deep`, and goal enforcement are listed
-  as gaps. Do not remove that section to make the project look complete.
-
-## Before you commit
-
-```bash
-node check.mjs
+```
+.
+├── agents/            11 agents, plain Markdown with YAML frontmatter
+├── commands/          9 slash commands
+├── instructions/      4 rule files, loaded through opencode.jsonc
+├── plugins/           4 Git submodules, one per published npm package
+├── install.mjs        links the submodules into a config directory
+├── check.mjs          the only test in the repository
+└── opencode.example.jsonc
 ```
 
-It must print `check: N files clean, M agents described`.
+## WHERE TO LOOK
 
-When you add an agent, give it a `description` and no `model`. When you add a
-command, check that any shell block uses a binary on `PATH`, not an absolute
-path from one machine.
+| Task | Location | Notes |
+| --- | --- | --- |
+| Add or change an agent | `agents/*.md` | Frontmatter needs a `description`, and no `model` |
+| Add a slash command | `commands/*.md` | Frontmatter: `description`, optional `agent` or `model` |
+| Add a rule every session reads | `instructions/*.md` | Then list it under `instructions` in the config |
+| Change what the installer does | `install.mjs` | It writes only inside the config directory |
+| Change a plugin | Its own repository | The submodule stays a submodule |
+| See the commit style | `git log -n 5` | Conventional Commits, see `instructions/git-workflow.md` |
+
+## CONVENTIONS
+
+- Commits follow Conventional Commits: `feat:`, `fix:`, `docs:`, `chore:`.
+  The four commits in the history all do.
+- Prose in `README.md`, `AGENTS.md`, and `commands/` is plain English, short
+  lines, no em dashes. Code comments explain why, not what.
+- An agent declares `mode: primary` or `mode: subagent`. Nine of the eleven
+  declare `disabled: false`; the two dream agents omit it.
+- An agent that must not write declares a `permissions` list: a catch-all
+  `deny` first, then one `allow` per action it needs.
+- The submodules keep their own `AGENTS.md`. Read the one in
+  `plugins/<name>/` before changing a plugin.
+
+## ANTI-PATTERNS
+
+- **A model in an agent file.** No agent names a model. Every agent inherits
+  the model of the session that runs it. A pinned model goes stale when a
+  provider renames or retires it, and keeping a matrix of provider chains
+  current is the failure mode this project exists to avoid. A user who wants a
+  cheap search agent pins that one agent locally. Commands may pin a model;
+  agents may not.
+- **An installer that rewrites the config.** `install.mjs` links the submodules
+  into the config directory and prints the lines to add. It never edits
+  `opencode.jsonc`, never copies agents over yours, and `--dry-run` shows every
+  action first. A script that rewrites the config is exactly what this project
+  refuses to do.
+- **Moving plugin code into this repository.** Each plugin keeps its own
+  repository, its own history, and its own npm release.
+- **A personal path or a secret in a published file.** `check.mjs` fails on
+  `/home/<user>`, bearer tokens, API keys, and private keys. It also fails when
+  an agent has no `description`, because OpenCode cannot offer an agent without
+  one.
+- **Deleting the "What this does not replace" section of the README** to make
+  the project look complete.
+
+## COMMANDS
+
+```bash
+node check.mjs                  # must print "check: N files clean, M agents described"
+node install.mjs --dry-run      # show what would be linked, change nothing
+node install.mjs                # build, then link the submodules into ~/.config/opencode/plugins
+git submodule update --init --recursive   # after a clone without --recurse-submodules
+```
+
+There is no `package.json` at the root, no test runner, and no CI. `check.mjs`
+is the whole test suite.
+
+## NOTES
+
+- `install.mjs` runs `npm install` and `npm run build` inside a submodule when
+  its `main` entry point is missing. It does this only when you omit
+  `--dry-run`.
+- `install.mjs` prints `./plugins/<name>` as the config value, because it
+  creates symlinks inside the config directory. `opencode.example.jsonc` lists
+  the npm package names instead. Both forms work; do not mix them.
+- The example config loads `instructions/git-workflow.md`, but `install.mjs`
+  prints only `secrets-and-verification.md` and `remote-ssh.md`.
+- Two commands name an `agent` that does not exist here: `readme.md` uses
+  `tools/doc`, `dream.md` uses `plan`. They fall back to the default agent.
+- `plugins/opencode-hashline-edit/dist/` is build output committed in the
+  submodule. Do not edit it; rebuild it.
+- OpenCode v2 accepts the `lsp` config key but runs no language server. No
+  `lsp_*` tool exists, so a command must shell out to a binary instead.
 
 ## Release
 
-Nothing to publish. This repository is not an npm package.
-
-The plugins it points at release themselves:
+Nothing to publish here. Each plugin publishes from its own CI when its
+`package.json` version is bumped:
 
 | Package | Repository |
 | --- | --- |
@@ -64,8 +108,6 @@ The plugins it points at release themselves:
 | `@vasilvestre/opencode-dream-memory` | `vasilvestre/opencode-dream-memory` |
 | `@vasilvestre/opencode-comment-checker` | `vasilvestre/opencode-comment-checker` |
 | `@vasilvestre/opencode-hashline-edit` | `vasilvestre/opencode-hashline-edit` |
-
-Each one publishes from its own CI when its `package.json` version is bumped.
 
 ## Commits
 

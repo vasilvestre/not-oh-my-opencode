@@ -33,7 +33,7 @@ These are files, not packages. OpenCode reads them from your config directory, s
 
 ```
 agents/        11 agents (orchestrator, explore, librarian, reviewer, ...)
-commands/      8 slash commands
+commands/      9 slash commands
 instructions/  4 instruction files (secrets, remote SSH, Atlassian, git)
 ```
 
@@ -148,9 +148,8 @@ Honest list, so you know what you give up by leaving oh-my-openagent:
 - **Team mode**: parallel agents with a shared task list and tmux panes.
 - **Background agents**: fire-and-forget subagents with a result queue.
 - **Prometheus interview planning**: a dedicated planner that interviews you.
-- **LSP and AST-grep tools**: OpenCode v2 does not run language servers, so neither do these bricks.
+- **LSP tools**: OpenCode v2 accepts the `lsp` config key but runs no language server, so it exposes no `lsp_*` tool and reports no diagnostics. AST-grep is a plain binary, so `commands/init-deep.md` uses it when `sg` is installed.
 - **Claude Code compatibility**: hooks, commands, and plugins from Claude Code.
-- **`/init-deep`**: hierarchical `AGENTS.md` generation.
 - **Goal and todo enforcement**: re-injecting a continuation prompt when the agent goes idle.
 
 Some of these are on the roadmap. Some are deliberately left out because a prompt cannot enforce them.
