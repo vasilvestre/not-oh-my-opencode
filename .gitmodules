@@ -1,0 +1,12 @@
+[submodule "plugins/opencode-plain-style"]
+	path = plugins/opencode-plain-style
+	url = https://github.com/vasilvestre/opencode-plain-style.git
+[submodule "plugins/opencode-dream-memory"]
+	path = plugins/opencode-dream-memory
+	url = https://github.com/vasilvestre/opencode-dream-memory.git
+[submodule "plugins/opencode-comment-checker"]
+	path = plugins/opencode-comment-checker
+	url = https://github.com/vasilvestre/opencode-comment-checker.git
+[submodule "plugins/opencode-hashline-edit"]
+	path = plugins/opencode-hashline-edit
+	url = https://github.com/vasilvestre/opencode-hashline-edit.git
