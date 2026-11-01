@@ -2,7 +2,7 @@
 
 A harness on a harness, built for OpenCode v2, that works.
 
-The four plugins live here as Git submodules, under `plugins/`. Each one still publishes alone on npm. `install.mjs` links the submodules into your OpenCode config directory, so you can run the latest code without waiting for a release.
+The five plugins live here as Git submodules, under `plugins/`. Each one still publishes alone on npm. `install.mjs` links the submodules into your OpenCode config directory, so you can run the latest code without waiting for a release.
 
 The script writes only inside your config directory. It never edits `opencode.jsonc` and never touches your own agents.
 
@@ -26,6 +26,7 @@ Each is an npm package you add to `plugins` in `opencode.jsonc`.
 | [`@vasilvestre/opencode-dream-memory`](https://github.com/vasilvestre/opencode-dream-memory) | Injects shared and per-project memory that survives compaction | published |
 | [`@vasilvestre/opencode-comment-checker`](https://github.com/vasilvestre/opencode-comment-checker) | Flags comments that add nothing after an edit | published |
 | [`@vasilvestre/opencode-hashline-edit`](https://github.com/vasilvestre/opencode-hashline-edit) | `LINE#ID` anchors that reject stale edits | published |
+| [`@vasilvestre/opencode-tool-guard`](https://github.com/vasilvestre/opencode-tool-guard) | Escalates `rm -rf`, `git push --force`, `DROP TABLE` and `chmod 777` from allow to ask | local |
 
 ### Agents, commands, instructions
 

@@ -10,7 +10,8 @@
   "plugins": [
     "@vasilvestre/opencode-plain-style",
     "@vasilvestre/opencode-dream-memory",
-    "@vasilvestre/opencode-comment-checker"
+    "@vasilvestre/opencode-comment-checker",
+    "@vasilvestre/opencode-tool-guard"
   ],
   "permissions": [
     { "action": "shell", "resource": "*", "effect": "allow" },

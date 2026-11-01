@@ -1,6 +1,6 @@
 # plugins
 
-Four Git submodules, one per published npm package. The code lives in its own
+Five Git submodules, one per npm package. The code lives in its own
 repository. This folder only points at it.
 
 ## Install
@@ -29,6 +29,7 @@ opencode plugin add @vasilvestre/opencode-plain-style
 | `opencode-dream-memory` | `@vasilvestre/opencode-dream-memory` | 0.3.1 | Injects memory that survives compaction |
 | `opencode-comment-checker` | `@vasilvestre/opencode-comment-checker` | 1.0.1 | Flags comments that add nothing after an edit |
 | `opencode-hashline-edit` | `@vasilvestre/opencode-hashline-edit` | 1.1.7 | `LINE#ID` anchors that reject stale edits |
+| `opencode-tool-guard` | `@vasilvestre/opencode-tool-guard` | 1.0.0 | Escalates a dangerous shell command from allow to ask |
 
 Each submodule has its own `README.md` and `AGENTS.md`. Read those before
 changing a plugin.

@@ -6,7 +6,7 @@
 ## OVERVIEW
 
 A showcase of OpenCode v2 bricks: 11 agents, 9 commands, 5 instruction files,
-and 4 plugins kept as Git submodules. It holds the files that cannot ship as
+and 5 plugins kept as Git submodules. It holds the files that cannot ship as
 npm packages, links the packages that can, and points at them.
 
 ## STRUCTURE
@@ -16,7 +16,7 @@ npm packages, links the packages that can, and points at them.
 ├── agents/            11 agents, plain Markdown with YAML frontmatter
 ├── commands/          9 slash commands
 ├── instructions/      5 rule files, loaded through opencode.jsonc
-├── plugins/           4 Git submodules, one per published npm package
+├── plugins/           5 Git submodules, one per npm package
 ├── install.mjs        links the submodules into a config directory
 ├── check.mjs          the only test in the repository
 └── opencode.example.jsonc
@@ -113,6 +113,7 @@ Nothing to publish here. Each plugin publishes from its own CI when its
 | `@vasilvestre/opencode-dream-memory` | `vasilvestre/opencode-dream-memory` |
 | `@vasilvestre/opencode-comment-checker` | `vasilvestre/opencode-comment-checker` |
 | `@vasilvestre/opencode-hashline-edit` | `vasilvestre/opencode-hashline-edit` |
+| `@vasilvestre/opencode-tool-guard` | `vasilvestre/opencode-tool-guard` |
 
 The user granted standing autonomy on 2026-11-01: push, tag, build, and
 release without asking each time. Keep the safety rails below; they replace

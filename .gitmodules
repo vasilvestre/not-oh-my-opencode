@@ -10,3 +10,6 @@
 [submodule "plugins/opencode-hashline-edit"]
 	path = plugins/opencode-hashline-edit
 	url = https://github.com/vasilvestre/opencode-hashline-edit.git
+[submodule "plugins/opencode-tool-guard"]
+	path = plugins/opencode-tool-guard
+	url = https://github.com/vasilvestre/opencode-tool-guard.git
