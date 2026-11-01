@@ -16,7 +16,7 @@ npm packages, links the packages that can, and points at them.
 ├── agents/            11 agents, plain Markdown with YAML frontmatter
 ├── commands/          9 slash commands
 ├── instructions/      5 rule files, loaded through opencode.jsonc
-├── plugins/           6 Git submodules, one per npm package
+├── plugins/           6 Git submodules, one per published npm package
 ├── install.mjs        links the submodules into a config directory
 ├── check.mjs          the only test in the repository
 └── opencode.example.jsonc
