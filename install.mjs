@@ -5,7 +5,6 @@
 import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
-import { execFileSync } from 'node:child_process'
 
 const ROOT = path.dirname(new URL(import.meta.url).pathname)
 const argv = process.argv.slice(2)
@@ -25,17 +24,8 @@ const plugins = fs
     const name = e.name
     const dir = path.join(ROOT, 'plugins', name)
     const pkg = JSON.parse(fs.readFileSync(path.join(dir, 'package.json'), 'utf8'))
-    return { name, dir, pkg, entry: path.join(dir, pkg.main) }
+    return { name, dir, pkg }
   })
-
-// A TypeScript plugin needs its build output before OpenCode can load it.
-const unbuilt = plugins.filter((p) => p.pkg.scripts?.build && !fs.existsSync(p.entry))
-if (!dryRun) {
-  for (const p of unbuilt) {
-    execFileSync('npm', ['install', '--no-audit', '--no-fund'], { cwd: p.dir, stdio: 'inherit' })
-    execFileSync('npm', ['run', 'build'], { cwd: p.dir, stdio: 'inherit' })
-  }
-}
 
 if (!dryRun) fs.mkdirSync(pluginsDir, { recursive: true })
 

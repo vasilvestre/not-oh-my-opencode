@@ -47,11 +47,10 @@ cd not-oh-my-opencode
 node install.mjs
 ```
 
-The script does three things:
+The script does two things:
 
-1. It builds the submodules that ship TypeScript (`opencode-hashline-edit`).
-2. It links each submodule into `~/.config/opencode/plugins/`.
-3. It prints the `plugins` and `instructions` lines to add to your config, and the `cp` commands for agents and commands.
+1. It links each submodule into `~/.config/opencode/plugins/`.
+2. It prints the `plugins` and `instructions` lines to add to your config, and the `cp` commands for agents and commands.
 
 Options:
 
@@ -178,7 +177,7 @@ Some of these are on the roadmap. Some are deliberately left out because a promp
 
 Two ways to get the fix:
 
-- Run `node install.mjs`. It builds the submodule and loads it from source.
+- Run `node install.mjs`. It links the submodule and loads it from source.
 - Load a local checkout of the repository:
 
 ```jsonc

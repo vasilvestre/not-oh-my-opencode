@@ -75,7 +75,7 @@ npm packages, links the packages that can, and points at them.
 ```bash
 node check.mjs                  # must print "check: N files clean, M agents described"
 node install.mjs --dry-run      # show what would be linked, change nothing
-node install.mjs                # build, then link the submodules into ~/.config/opencode/plugins
+node install.mjs                # link the submodules into ~/.config/opencode/plugins
 git submodule update --init --recursive   # after a clone without --recurse-submodules
 ```
 
@@ -84,9 +84,8 @@ is the whole test suite.
 
 ## NOTES
 
-- `install.mjs` runs `npm install` and `npm run build` inside a submodule when
-  its `main` entry point is missing. It does this only when you omit
-  `--dry-run`.
+- `install.mjs` only links. It never runs `npm install` nor `npm run build`,
+  because `plugins/opencode-hashline-edit/dist/` is committed.
 - `install.mjs` prints `./plugins/<name>` as the config value, because it
   creates symlinks inside the config directory. `opencode.example.jsonc` lists
   the npm package names instead. Both forms work; do not mix them.
