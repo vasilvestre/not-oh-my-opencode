@@ -8,7 +8,7 @@ system prompt that drives the agent.
 Copy the ones you want into your OpenCode config directory:
 
 ```bash
-cp agents/*.md ~/.config/opencode/agents/
+cp agents/[!R]*.md ~/.config/opencode/agents/
 ```
 
 Then pick the one a new session starts with, in `opencode.jsonc`:

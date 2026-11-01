@@ -25,7 +25,7 @@ Each is an npm package you add to `plugins` in `opencode.jsonc`.
 | [`@vasilvestre/opencode-plain-style`](https://github.com/vasilvestre/opencode-plain-style) | Injects a plain-language rulebook into every system prompt | published |
 | [`@vasilvestre/opencode-dream-memory`](https://github.com/vasilvestre/opencode-dream-memory) | Injects shared and per-project memory that survives compaction | published |
 | [`@vasilvestre/opencode-comment-checker`](https://github.com/vasilvestre/opencode-comment-checker) | Flags comments that add nothing after an edit | published |
-| [`@vasilvestre/opencode-hashline-edit`](https://github.com/vasilvestre/opencode-hashline-edit) | `LINE#ID` anchors that reject stale edits | **npm 1.1.3 is broken, see below** |
+| [`@vasilvestre/opencode-hashline-edit`](https://github.com/vasilvestre/opencode-hashline-edit) | `LINE#ID` anchors that reject stale edits | published |
 
 ### Agents, commands, instructions
 
@@ -86,8 +86,8 @@ instructions into your OpenCode config directory. Copy only what you want.
 
 ```bash
 mkdir -p ~/.config/opencode/{agents,commands,instructions}
-cp agents/*.md ~/.config/opencode/agents/
-cp commands/*.md ~/.config/opencode/commands/
+cp agents/[!R]*.md ~/.config/opencode/agents/
+cp commands/[!R]*.md ~/.config/opencode/commands/
 cp instructions/*.md ~/.config/opencode/instructions/
 ```
 
@@ -170,21 +170,6 @@ Honest list, so you know what you give up by leaving oh-my-openagent:
 - **Goal and todo enforcement**: re-injecting a continuation prompt when the agent goes idle.
 
 Some of these are on the roadmap. Some are deliberately left out because a prompt cannot enforce them.
-
-## Known issue
-
-`@vasilvestre/opencode-hashline-edit@1.1.3` on npm cannot load. Its build emits imports without file extensions (`./hashline-edit-executor`), which Node rejects in ESM. Version 1.1.7 in the repository fixes this.
-
-Two ways to get the fix:
-
-- Run `node install.mjs`. It links the submodule and loads it from source.
-- Load a local checkout of the repository:
-
-```jsonc
-{
-  "plugins": [{ "package": "/path/to/opencode-hashline-edit" }]
-}
-```
 
 ## License
 

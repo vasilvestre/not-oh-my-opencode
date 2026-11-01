@@ -51,5 +51,5 @@ ${names.map((n) => `    "./plugins/${n}"`).join(',\n')}
 
 Copy the agents and commands you want:
   mkdir -p ${path.join(config, 'agents')} ${path.join(config, 'commands')}
-  cp ${ROOT}/agents/*.md ${path.join(config, 'agents')}/
-  cp ${ROOT}/commands/*.md ${path.join(config, 'commands')}/`)
+  cp ${ROOT}/agents/[!R]*.md ${path.join(config, 'agents')}/
+  cp ${ROOT}/commands/[!R]*.md ${path.join(config, 'commands')}/`)

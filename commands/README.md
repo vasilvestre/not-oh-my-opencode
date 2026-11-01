@@ -8,7 +8,7 @@ prompt the command sends.
 Copy the ones you want into your OpenCode config directory:
 
 ```bash
-cp commands/*.md ~/.config/opencode/commands/
+cp commands/[!R]*.md ~/.config/opencode/commands/
 ```
 
 A command then runs under its file name: `review.md` becomes `/review`.
