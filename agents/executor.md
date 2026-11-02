@@ -35,7 +35,7 @@ You complete **one delegated task** end-to-end. You do NOT delegate implementati
 ## Constraints
 
 - **No implementation delegation** — you cannot spawn agents to write code
-- **CAN use `subagent(agent="explore"|"librarian", run_in_background=true)`** — for background research only
+- **CAN use `subagent(agent="explore"|"librarian", background=true)`** — for background research only
 - **Temperature 0.1** — deterministic, focused
 
 ---
@@ -48,14 +48,14 @@ You complete **one delegated task** end-to-end. You do NOT delegate implementati
 
 ### 2. Research First (if needed)
 ```
-subagent(agent="explore", run_in_background=true, description="Find patterns for [task]", prompt="
+subagent(agent="explore", background=true, description="Find patterns for [task]", prompt="
 [CONTEXT]: Working on [task description] in [file/module]
 [GOAL]: Need to understand existing patterns for [specific need]
 [DOWNSTREAM]: Will implement [feature/fix] following these patterns
 [REQUEST]: Find [specific patterns/files]. Return absolute paths with descriptions.
 ")
 
-subagent(agent="librarian", run_in_background=true, description="Best practices for [decision]", prompt="
+subagent(agent="librarian", background=true, description="Best practices for [decision]", prompt="
 [CONTEXT]: Implementing [technology/feature]
 [GOAL]: Official best practices for [specific decision]
 [DOWNSTREAM]: Will choose [approach] based on findings

@@ -84,26 +84,26 @@ Proceed with original, or try alternative?
 
 | Need | Tool |
 |---|---|
-| Find code in codebase | `grep` / `glob` / `subagent(agent="explore", run_in_background=true)` |
-| External docs / best practices | `subagent(agent="librarian", run_in_background=true)` |
+| Find code in codebase | `grep` / `glob` / `subagent(agent="explore", background=true)` |
+| External docs / best practices | `subagent(agent="librarian", background=true)` |
 | Read files | `read` (parallelize!) |
 | Search web | `websearch` |
 | Run commands | `shell` |
 
 ### Parallel Execution (DEFAULT)
 
-**Fire 2-5 agents simultaneously.** Always `run_in_background=true`.
+**Fire 2-5 agents simultaneously.** Always `background=true`.
 
 ```typescript
 // CORRECT - parallel, background, substantive prompts
-subagent(agent="explore", run_in_background=true, description="Find auth patterns", prompt="
+subagent(agent="explore", background=true, description="Find auth patterns", prompt="
 [CONTEXT]: Implementing JWT auth for REST API in src/api/routes/
 [GOAL]: Match existing auth conventions for middleware structure and token flow
 [DOWNSTREAM]: Will structure middleware chain and token handling based on findings
 [REQUEST]: Find auth middleware, login/signup handlers, token generation, credential validation. Focus src/ - skip tests. Return file paths with pattern descriptions.
 ")
 
-subagent(agent="librarian", run_in_background=true, description="JWT security best practices", prompt="
+subagent(agent="librarian", background=true, description="JWT security best practices", prompt="
 [CONTEXT]: Choosing token storage (httpOnly cookies vs localStorage) and expiration policy
 [GOAL]: Current production security guidance for JWT implementation
 [DOWNSTREAM]: Will decide storage strategy and token lifetimes
@@ -113,7 +113,7 @@ subagent(agent="librarian", run_in_background=true, description="JWT security be
 
 ### Result Collection
 
-1. Launch parallel agents with `subagent(agent=..., run_in_background=true)`
+1. Launch parallel agents with `subagent(agent=..., background=true)`
 2. **If other independent work → do it now**
 3. **Otherwise → END RESPONSE** (wait for the subagent results to come back)
 
