@@ -40,4 +40,22 @@ for (const file of agents) {
   assert.match(text, /^---\n[\s\S]*?mode: (primary|subagent)/m, `${file} has no mode`)
 }
 
+// The delegation tool is `subagent`, not the deprecated `task`. OpenCode v2
+// renamed it, and the old names no longer work. A prompt that still uses them
+// breaks delegation.
+const DEPRECATED = [
+  { name: 'task tool', re: /\btask\(/ },
+  { name: 'task permission action', re: /action: task\b/ },
+  { name: 'task_id parameter', re: /\btask_id\b/ },
+  { name: 'subagent_type parameter', re: /\bsubagent_type\b/ },
+  { name: 'run_in_background parameter', re: /\brun_in_background\b/ },
+  { name: 'background_output tool', re: /\bbackground_output\b/ },
+]
+for (const file of agents) {
+  const text = fs.readFileSync(path.join(ROOT, 'agents', file), 'utf8')
+  for (const { name, re } of DEPRECATED) {
+    assert.equal(re.test(text), false, `${file} uses the deprecated ${name}`)
+  }
+}
+
 console.log(`check: ${files.length} files clean, ${agents.length} agents described`)
