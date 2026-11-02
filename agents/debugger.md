@@ -1,5 +1,6 @@
 ---
 description: Debug failing tests, crashes, and production issues
+mode: subagent
 disabled: false
 permissions:
   - action: "*"

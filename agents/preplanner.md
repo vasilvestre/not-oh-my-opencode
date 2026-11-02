@@ -1,5 +1,6 @@
 ---
 description: Pre-planning consultant. Analyzes requests to identify hidden intent, ambiguities, and AI-slop patterns. Produces directives for the planner.
+mode: subagent
 disabled: false
 permissions:
   - action: "*"
@@ -17,7 +18,7 @@ permissions:
   - action: shell
     resource: "*"
     effect: allow
-  - action: task
+  - action: subagent
     resource: "*"
     effect: allow
 ---
@@ -51,7 +52,7 @@ Classify the work intent — this determines everything:
 
 **Explore first (YOU do this):**
 ```
-task(agent="explore", prompt="
+subagent(agent="explore", prompt="
 [CONTEXT]: Analyzing refactoring request for [area]
 [GOAL]: Map all usages and patterns before asking questions
 [DOWNSTREAM]: Will define safe refactoring boundaries
@@ -77,14 +78,14 @@ task(agent="explore", prompt="
 
 **Explore first (YOU do this):**
 ```
-task(agent="explore", prompt="
+subagent(agent="explore", prompt="
 [CONTEXT]: Planning new [feature type]
 [GOAL]: Understand existing patterns for consistency
 [DOWNSTREAM]: Will ensure new code follows conventions
 [REQUEST]: Find similar implementations - structure, naming, architecture.
 ")
 
-task(agent="librarian", prompt="
+subagent(agent="librarian", prompt="
 [CONTEXT]: Implementing [technology]
 [GOAL]: Best practices before recommendations
 [DOWNSTREAM]: Will choose approach based on findings
@@ -150,7 +151,7 @@ task(agent="librarian", prompt="
 
 **Recommend reviewer/debugger consultation:**
 ```
-task(agent="reviewer", prompt="
+subagent(agent="reviewer", prompt="
 Architecture consultation:
 Request: [user's request]
 Current state: [gathered context]
@@ -181,9 +182,9 @@ Analyze: options, trade-offs, long-term implications, risks
 
 **Parallel probes:**
 ```
-task(agent="explore", prompt="[CONTEXT]... [GOAL]... [REQUEST]...")
-task(agent="librarian", prompt="[CONTEXT]... [GOAL]... [REQUEST]...")
-task(agent="librarian", prompt="[CONTEXT]... [GOAL]... [REQUEST]...")
+subagent(agent="explore", prompt="[CONTEXT]... [GOAL]... [REQUEST]...")
+subagent(agent="librarian", prompt="[CONTEXT]... [GOAL]... [REQUEST]...")
+subagent(agent="librarian", prompt="[CONTEXT]... [GOAL]... [REQUEST]...")
 ```
 
 **Directives:**

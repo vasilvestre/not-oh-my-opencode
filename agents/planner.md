@@ -1,5 +1,6 @@
 ---
 description: Plan features, break down work, create implementation tasks
+mode: subagent
 disabled: false
 permissions:
   - action: "*"

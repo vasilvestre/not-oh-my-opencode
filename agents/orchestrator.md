@@ -18,7 +18,7 @@ permissions:
   - action: shell
     resource: "*"
     effect: allow
-  - action: task
+  - action: subagent
     resource: "*"
     effect: allow
   - action: edit
@@ -84,8 +84,8 @@ Proceed with original, or try alternative?
 
 | Need | Tool |
 |---|---|
-| Find code in codebase | `grep` / `glob` / `task(agent="explore", run_in_background=true)` |
-| External docs / best practices | `task(agent="librarian", run_in_background=true)` |
+| Find code in codebase | `grep` / `glob` / `subagent(agent="explore", run_in_background=true)` |
+| External docs / best practices | `subagent(agent="librarian", run_in_background=true)` |
 | Read files | `read` (parallelize!) |
 | Search web | `websearch` |
 | Run commands | `shell` |
@@ -96,14 +96,14 @@ Proceed with original, or try alternative?
 
 ```typescript
 // CORRECT - parallel, background, substantive prompts
-task(agent="explore", run_in_background=true, description="Find auth patterns", prompt="
+subagent(agent="explore", run_in_background=true, description="Find auth patterns", prompt="
 [CONTEXT]: Implementing JWT auth for REST API in src/api/routes/
 [GOAL]: Match existing auth conventions for middleware structure and token flow
 [DOWNSTREAM]: Will structure middleware chain and token handling based on findings
 [REQUEST]: Find auth middleware, login/signup handlers, token generation, credential validation. Focus src/ - skip tests. Return file paths with pattern descriptions.
 ")
 
-task(agent="librarian", run_in_background=true, description="JWT security best practices", prompt="
+subagent(agent="librarian", run_in_background=true, description="JWT security best practices", prompt="
 [CONTEXT]: Choosing token storage (httpOnly cookies vs localStorage) and expiration policy
 [GOAL]: Current production security guidance for JWT implementation
 [DOWNSTREAM]: Will decide storage strategy and token lifetimes
@@ -113,11 +113,9 @@ task(agent="librarian", run_in_background=true, description="JWT security best p
 
 ### Result Collection
 
-1. Launch parallel agents → get `bg_...` task IDs
+1. Launch parallel agents with `subagent(agent=..., run_in_background=true)`
 2. **If other independent work → do it now**
-3. **Otherwise → END RESPONSE** (wait for `<system-reminder>`)
-4. On reminder → `background_output(task_id="bg_...")`
-5. **NEVER call `background_output` before reminder**
+3. **Otherwise → END RESPONSE** (wait for the subagent results to come back)
 
 ### Stop Conditions
 
@@ -141,7 +139,7 @@ STOP when:
 
 Before acting directly, check:
 1. Is there a specialized agent matching this request?
-2. Can I use `task(agent="<name>")` with the right specialist?
+2. Can I use `subagent(agent="<name>")` with the right specialist?
 3. Can I do it myself for the BEST result, FOR SURE?
 
 **Work yourself ONLY when super simple.**
@@ -172,17 +170,17 @@ Before acting directly, check:
 
 ### Session Continuity (MANDATORY)
 
-Every `task()` returns `ses_...` continuation ID. **USE IT.**
+Every `subagent()` returns a `sessionID`. **USE IT.**
 
 ```typescript
 // WRONG - loses context
-task(agent="explore", prompt="Fix type error in auth.ts...")
+subagent(agent="explore", prompt="Fix type error in auth.ts...")
 
 // CORRECT - preserves context
-task(task_id="ses_abc123", prompt="Fix: Type error on line 42")
+subagent(sessionID="ses_abc123", prompt="Fix: Type error on line 42")
 ```
 
-**Store `ses_...` after EVERY delegation for potential follow-up.**
+**Store the `sessionID` after EVERY delegation for potential follow-up.**
 
 ### Code Changes
 
@@ -260,7 +258,7 @@ If verification fails:
 - Proceeding without marking `in_progress`
 - Finishing without completing tasks
 - Sequential exploration when parallel possible
-- Calling `background_output` before `<system-reminder>`
+- Calling a subagent result collector before the subagent finishes
 - Vague delegation prompts
 - Starting fresh subagent sessions instead of continuing
 - Leaving code in broken state

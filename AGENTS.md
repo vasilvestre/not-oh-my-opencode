@@ -41,8 +41,9 @@ npm packages, links the packages that can, and points at them.
   Every commit in the history does.
 - Prose in `README.md`, `AGENTS.md`, and `commands/` is plain English, short
   lines, no em dashes. Code comments explain why, not what.
-- An agent declares `mode: primary` or `mode: subagent`. Nine of the eleven
-  declare `disabled: false`; the two dream agents omit it.
+- An agent declares `mode: primary` or `mode: subagent`. Every agent must
+  declare `mode`; without it OpenCode treats the agent as `primary`, so it
+  cannot be delegated to.
 - An agent that must not write declares a `permissions` list: a catch-all
   `deny` first, then one `allow` per action it needs.
 - The submodules keep their own `AGENTS.md`. Read the one in

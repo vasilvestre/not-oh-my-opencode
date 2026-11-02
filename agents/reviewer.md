@@ -1,5 +1,6 @@
 ---
 description: Review code for correctness, missing tests, and best practices
+mode: subagent
 disabled: false
 permissions:
   - action: "*"

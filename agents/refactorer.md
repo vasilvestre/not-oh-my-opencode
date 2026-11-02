@@ -1,5 +1,6 @@
 ---
 description: Refactor code for clarity, remove duplication, simplify
+mode: subagent
 disabled: false
 permissions:
   - action: "*"

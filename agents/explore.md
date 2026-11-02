@@ -66,7 +66,7 @@ Always end with exact format:
 
 ## Tool Strategy
 
-**Semantic search** (concepts, intent, "code that does X"): `grepai` — invoked by orchestrator via `task(agent="explore", run_in_background=true)`
+**Semantic search** (concepts, intent, "code that does X"): `grepai` — invoked by orchestrator via `subagent(agent="explore", run_in_background=true)`
 
 **Precise definitions/references**: LSP tools (`lsp_goto_definition`, `lsp_find_references`)
 

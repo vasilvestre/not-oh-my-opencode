@@ -63,7 +63,7 @@ Classify EVERY request before acting:
 
 ### Tool Strategy for External Code Search
 
-**Semantic search** (concepts in external repos): `grepai` — run in background with `task(agent="explore", run_in_background=true)`
+**Semantic search** (concepts in external repos): `grepai` — run in background with `subagent(agent="explore", run_in_background=true)`
 
 **Precise implementation lookup**: `gh clone` + grep/read/LSP
 

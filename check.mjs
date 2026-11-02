@@ -35,6 +35,9 @@ const agents = fs.readdirSync(path.join(ROOT, 'agents')).filter((f) => f.endsWit
 for (const file of agents) {
   const text = fs.readFileSync(path.join(ROOT, 'agents', file), 'utf8')
   assert.match(text, /^---\n[\s\S]*?description:/m, `${file} has no description`)
+  // Without `mode`, OpenCode treats the agent as `primary`, so it cannot be
+  // delegated to. Every agent must declare its mode.
+  assert.match(text, /^---\n[\s\S]*?mode: (primary|subagent)/m, `${file} has no mode`)
 }
 
 console.log(`check: ${files.length} files clean, ${agents.length} agents described`)
