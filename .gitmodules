@@ -25,3 +25,6 @@
 [submodule "plugins/opencode-lsp-suggest"]
 	path = plugins/opencode-lsp-suggest
 	url = https://github.com/vasilvestre/opencode-lsp-suggest.git
+[submodule "plugins/opencode-background-resumer"]
+	path = plugins/opencode-background-resumer
+	url = https://github.com/vasilvestre/opencode-background-resumer.git
