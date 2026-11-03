@@ -31,7 +31,7 @@ opencode plugin add @vasilvestre/opencode-plain-style
 | `opencode-hashline-edit` | `@vasilvestre/opencode-hashline-edit` | 1.1.7 | `LINE#ID` anchors that reject stale edits |
 | `opencode-tool-guard` | `@vasilvestre/opencode-tool-guard` | 1.0.0 | Escalates a dangerous shell command from allow to ask |
 | `opencode-todo-enforcer` | `@vasilvestre/opencode-todo-enforcer` | 1.0.0 | Resumes an idle session while its todos are open |
-| `opencode-background-resumer` | `@vasilvestre/opencode-background-resumer` | 0.1.1 | Resumes an idle session once its background subagents finish |
+| `opencode-background-resumer` | `@vasilvestre/opencode-background-resumer` | 0.1.2 | Resumes an idle session once its background subagents finish |
 | `opencode-provider-tuning` | `@vasilvestre/opencode-provider-tuning` | 0.1.0 | Retry backoff, auxiliary token cap, local titles |
 | `opencode-lsp-suggest` | `@vasilvestre/opencode-lsp-suggest` | 0.1.0 | Suggests installing a missing language server, quiet when OpenCode runs one |
 | `opencode-php-lsp` | `@vasilvestre/opencode-php-lsp` | 0.1.1 | PHP and Twig diagnostics, definition, references and hover from real language servers |
