@@ -25,7 +25,7 @@ opencode plugin add @vasilvestre/opencode-plain-style
 
 | Folder | Package | Version | What it does |
 | --- | --- | --- | --- |
-| `opencode-plain-style` | `@vasilvestre/opencode-plain-style` | 1.2.1 | Injects a plain-language rulebook into every system prompt |
+| `opencode-plain-style` | `@vasilvestre/opencode-plain-style` | 1.3.1 | Injects a plain-language rulebook into every system prompt |
 | `opencode-dream-memory` | `@vasilvestre/opencode-dream-memory` | 0.3.1 | Injects memory that survives compaction |
 | `opencode-comment-checker` | `@vasilvestre/opencode-comment-checker` | 1.0.1 | Flags comments that add nothing after an edit |
 | `opencode-hashline-edit` | `@vasilvestre/opencode-hashline-edit` | 1.1.7 | `LINE#ID` anchors that reject stale edits |
