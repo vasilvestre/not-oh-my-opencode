@@ -30,6 +30,7 @@ Each is an npm package you add to `plugins` in `opencode.jsonc`.
 | [`@vasilvestre/opencode-hashline-edit`](https://github.com/vasilvestre/opencode-hashline-edit) | `LINE#ID` anchors that reject stale edits | published |
 | [`@vasilvestre/opencode-tool-guard`](https://github.com/vasilvestre/opencode-tool-guard) | Escalates `rm -rf`, `git push --force`, `DROP TABLE` and `chmod 777` from allow to ask | published |
 | [`@vasilvestre/opencode-todo-enforcer`](https://github.com/vasilvestre/opencode-todo-enforcer) | Resumes an idle session while its todos are still open | published |
+| [`@vasilvestre/opencode-background-resumer`](https://github.com/vasilvestre/opencode-background-resumer) | Resumes an idle session once its background subagents finish | published |
 | [`@vasilvestre/opencode-provider-tuning`](https://github.com/vasilvestre/opencode-provider-tuning) | Longer wait on a rate limit, capped auxiliary tokens, optional local titles | published |
 | [`@vasilvestre/opencode-lsp-suggest`](https://github.com/vasilvestre/opencode-lsp-suggest) | Tells the agent when a language server is missing, quiet when OpenCode already runs one | unpublished |
 | [`@vasilvestre/opencode-php-lsp`](https://github.com/vasilvestre/opencode-php-lsp) | PHP and Twig diagnostics, definition, references and hover, from intelephense and Symfony Language Tools | published |
