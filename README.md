@@ -2,7 +2,7 @@
 
 A harness on a harness, built for OpenCode v2, that works.
 
-The six plugins live here as Git submodules, under `plugins/`. Each one still publishes alone on npm. `install.mjs` links the submodules into your OpenCode config directory, so you can run the latest code without waiting for a release.
+Each plugin lives in its own repository, linked here as a Git submodule under `plugins/`. Every one publishes alone on npm. `install.mjs` links the submodules into your OpenCode config directory, so you can run the latest code without waiting for a release.
 
 The script writes only inside your config directory. It never edits `opencode.jsonc` and never touches your own agents.
 
@@ -13,6 +13,8 @@ The script writes only inside your config directory. It never edits `opencode.js
 This project takes the opposite route: small, separate bricks, each one readable in a single sitting. No binary. No install script that rewrites your config. No telemetry.
 
 The philosophy differs, so the name differs.
+
+We still share its [manifesto](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/manifesto.md): human intervention is a failure signal, agent code must be indistinguishable from a senior engineer's, and the human states intent while the agent handles the rest. This project disagrees on the delivery, not on the goal.
 
 ## The bricks
 
@@ -29,6 +31,8 @@ Each is an npm package you add to `plugins` in `opencode.jsonc`.
 | [`@vasilvestre/opencode-tool-guard`](https://github.com/vasilvestre/opencode-tool-guard) | Escalates `rm -rf`, `git push --force`, `DROP TABLE` and `chmod 777` from allow to ask | published |
 | [`@vasilvestre/opencode-todo-enforcer`](https://github.com/vasilvestre/opencode-todo-enforcer) | Resumes an idle session while its todos are still open | published |
 | [`@vasilvestre/opencode-provider-tuning`](https://github.com/vasilvestre/opencode-provider-tuning) | Longer wait on a rate limit, capped auxiliary tokens, optional local titles | published |
+| `@vasilvestre/opencode-lsp-suggest` | Tells the agent when a language server is missing, quiet when OpenCode already runs one | unpublished |
+| [`@vasilvestre/opencode-php-lsp`](https://github.com/vasilvestre/opencode-php-lsp) | PHP and Twig diagnostics, definition, references and hover, from intelephense and Symfony Language Tools | published |
 
 ### Agents, commands, instructions
 
@@ -168,7 +172,7 @@ Honest list, so you know what you give up by leaving oh-my-openagent:
 - **Team mode**: parallel agents with a shared task list and tmux panes.
 - **Background agents**: fire-and-forget subagents with a result queue.
 - **Prometheus interview planning**: a dedicated planner that interviews you.
-- **LSP tools**: OpenCode v2 accepts the `lsp` config key but runs no language server, so it exposes no `lsp_*` tool and reports no diagnostics. AST-grep is a plain binary, so `commands/init-deep.md` uses it when `ast-grep` is installed.
+- **LSP tools**: OpenCode v2 runs no language server. It drops the `lsp` config key before the runtime sees it, and exposes no `lsp_*` tool. Two plugins cover the gap: `opencode-lsp-suggest` tells the agent when a server is missing, `opencode-php-lsp` answers diagnostics, definition, references and hover for PHP and Twig. The port is tracked in [anomalyco/opencode#38528](https://github.com/anomalyco/opencode/issues/38528). AST-grep is a plain binary, so `commands/init-deep.md` uses it when `ast-grep` is installed.
 - **Claude Code compatibility**: hooks, commands, and plugins from Claude Code.
 - **Goal and todo enforcement**: re-injecting a continuation prompt when the agent goes idle.
 

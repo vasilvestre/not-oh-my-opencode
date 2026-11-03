@@ -1,6 +1,6 @@
 # plugins
 
-Six Git submodules, one per published npm package. The code lives in its own
+Eight Git submodules, one per published npm package. The code lives in its own
 repository. This folder only points at it.
 
 ## Install
@@ -32,6 +32,8 @@ opencode plugin add @vasilvestre/opencode-plain-style
 | `opencode-tool-guard` | `@vasilvestre/opencode-tool-guard` | 1.0.0 | Escalates a dangerous shell command from allow to ask |
 | `opencode-todo-enforcer` | `@vasilvestre/opencode-todo-enforcer` | 1.0.0 | Resumes an idle session while its todos are open |
 | `opencode-provider-tuning` | `@vasilvestre/opencode-provider-tuning` | 0.1.0 | Retry backoff, auxiliary token cap, local titles |
+| `opencode-lsp-suggest` | `@vasilvestre/opencode-lsp-suggest` | 0.1.0 | Suggests installing a missing language server, quiet when OpenCode runs one |
+| `opencode-php-lsp` | `@vasilvestre/opencode-php-lsp` | 0.1.1 | PHP and Twig diagnostics, definition, references and hover from real language servers |
 
 Each submodule has its own `README.md` and `AGENTS.md`. Read those before
 changing a plugin.

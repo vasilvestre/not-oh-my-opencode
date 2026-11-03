@@ -97,8 +97,9 @@ is the whole test suite.
   uses `tools/doc`, `dream.md` uses `plan`. They fall back to the default agent.
 - `plugins/opencode-hashline-edit/dist/` is build output committed in the
   submodule. Do not edit it; rebuild it.
-- OpenCode v2 accepts the `lsp` config key but runs no language server. No
-  `lsp_*` tool exists, so a command must shell out to a binary instead.
+- OpenCode v2 runs no language server: it drops the `lsp` config key and
+  exposes no `lsp_*` tool. `plugins/opencode-php-lsp/` supplies PHP and Twig
+  tools, and `plugins/opencode-lsp-suggest/` warns when a server is missing.
 - Each folder has a `README.md` with its install step. `install.mjs` lists
   only directories under `plugins/`, and `check.mjs` skips `agents/README.md`,
   because a README is not a plugin nor an agent.

@@ -24,6 +24,7 @@ Then pick the one a new session starts with, in `opencode.jsonc`:
 | File | Mode | Role |
 | --- | --- | --- |
 | `orchestrator.md` | primary | Classifies intent, delegates, never codes directly |
+| `orchestrator-light.md` | primary | Lightweight orchestrator for simple tasks |
 | `preplanner.md` | subagent | Surfaces hidden intent and ambiguities before planning |
 | `planner.md` | subagent | Breaks work into ordered tasks |
 | `executor.md` | subagent | Completes one delegated task, no further delegation |
