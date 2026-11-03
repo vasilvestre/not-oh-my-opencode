@@ -41,7 +41,7 @@ These are files, not packages. OpenCode reads them from your config directory, s
 
 ```
 agents/        11 agents (orchestrator, explore, librarian, reviewer, ...)
-commands/      9 slash commands
+commands/      6 slash commands
 instructions/  5 instruction files (secrets, remote SSH, workspace hygiene, Atlassian, git)
 ```
 

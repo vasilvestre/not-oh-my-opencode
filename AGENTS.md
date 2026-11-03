@@ -5,7 +5,7 @@
 
 ## OVERVIEW
 
-A showcase of OpenCode v2 bricks: 11 agents, 9 commands, 5 instruction files,
+A showcase of OpenCode v2 bricks: 11 agents, 6 commands, 5 instruction files,
 and 6 plugins kept as Git submodules. It holds the files that cannot ship as
 npm packages, links the packages that can, and points at them.
 
@@ -14,7 +14,7 @@ npm packages, links the packages that can, and points at them.
 ```
 .
 ├── agents/            11 agents, plain Markdown with YAML frontmatter
-├── commands/          9 slash commands
+├── commands/          6 slash commands
 ├── instructions/      5 rule files, loaded through opencode.jsonc
 ├── plugins/           6 Git submodules, one per published npm package
 ├── install.mjs        links the submodules into a config directory

@@ -1,7 +1,9 @@
 # commands
 
-Nine OpenCode slash commands. Each file is Markdown: YAML frontmatter, then the
+Six OpenCode slash commands. Each file is Markdown: YAML frontmatter, then the
 prompt the command sends.
+
+Ponytail is not here. It ships as its own plugin, `@dietrichgebert/ponytail`.
 
 ## Install
 
@@ -23,9 +25,6 @@ A command then runs under its file name: `review.md` becomes `/review`.
 | `spec-tasks.md` | `/spec-tasks` | Turns a spec into TDD tasks |
 | `maintain-readme.md` | `/maintain-readme` | Creates or updates `README.md` |
 | `dream.md` | `/dream` | Shows the dream job state |
-| `ponytail.md` | `/ponytail` | Switches the ponytail intensity level |
-| `ponytail-review.md` | `/ponytail-review` | Reviews a diff for over-engineering |
-| `ponytail-audit.md` | `/ponytail-audit` | Audits the whole repo for over-engineering |
 
 ## Frontmatter
 
