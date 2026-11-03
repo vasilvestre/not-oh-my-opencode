@@ -1,6 +1,6 @@
 # plugins
 
-Eight Git submodules, one per published npm package. The code lives in its own
+Nine Git submodules, one per published npm package. The code lives in its own
 repository. This folder only points at it.
 
 ## Install

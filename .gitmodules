@@ -22,3 +22,6 @@
 [submodule "plugins/opencode-php-lsp"]
 	path = plugins/opencode-php-lsp
 	url = https://github.com/vasilvestre/opencode-php-lsp.git
+[submodule "plugins/opencode-lsp-suggest"]
+	path = plugins/opencode-lsp-suggest
+	url = https://github.com/vasilvestre/opencode-lsp-suggest.git
