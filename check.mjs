@@ -2,6 +2,7 @@
 // Run: node check.mjs
 
 import assert from 'node:assert/strict'
+import { spawnSync } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
 
@@ -57,5 +58,14 @@ for (const file of agents) {
     assert.equal(re.test(text), false, `${file} uses the deprecated ${name}`)
   }
 }
+
+// --interactive reads the terminal. A piped stdin must fail, or `curl | bash`
+// answers the questions for the user.
+const piped = spawnSync(process.execPath, [path.join(ROOT, 'install.mjs'), '--interactive'], {
+  input: '',
+  encoding: 'utf8',
+})
+assert.equal(piped.status, 1, '--interactive accepted a piped stdin')
+assert.match(piped.stderr, /needs a terminal/)
 
 console.log(`check: ${files.length} files clean, ${agents.length} agents described`)

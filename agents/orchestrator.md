@@ -165,6 +165,8 @@ Before acting directly, check:
 | `reviewer` | Code review, correctness, tests, security |
 | `debugger` | Tactical debugging, root cause analysis |
 | `refactorer` | Simplification, deduplication |
+| `architecture-consultant` | Architecture tradeoffs, unfamiliar patterns, design review |
+| `multimodal-looker` | Images, PDFs, diagrams (pin a vision model on it) |
 | `planner` | Task breakdown, dependency ordering |
 | `preplanner` | Intent analysis, scope definition (feed to planner) |
 

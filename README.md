@@ -4,7 +4,7 @@ A harness on a harness, built for OpenCode v2, that works.
 
 Each plugin lives in its own repository, linked here as a Git submodule under `plugins/`. Every one publishes alone on npm. `install.mjs` links the submodules into your OpenCode config directory, so you can run the latest code without waiting for a release.
 
-The script writes only inside your config directory. It never edits `opencode.jsonc` and never touches your own agents.
+The script writes only inside your config directory. It never edits `opencode.jsonc`, and it replaces one of your own agents only when you say yes.
 
 ## Why the name
 
@@ -40,7 +40,7 @@ Each is an npm package you add to `plugins` in `opencode.jsonc`.
 These are files, not packages. OpenCode reads them from your config directory, so copy the ones you want.
 
 ```
-agents/        11 agents (orchestrator, explore, librarian, reviewer, ...)
+agents/        12 agents (orchestrator, explore, librarian, reviewer, ...)
 commands/      6 slash commands
 instructions/  5 instruction files (secrets, remote SSH, workspace hygiene, Atlassian, git)
 ```
@@ -63,9 +63,15 @@ The script does two things:
 Options:
 
 ```sh
+node install.mjs --interactive             # choose plugins, agents and commands one by one
 node install.mjs --dry-run                 # show what it would link, change nothing
 node install.mjs --config /path/to/opencode  # use another config directory
 ```
+
+With `--interactive`, the script prints each description and asks a yes/no
+question. When a file already exists and differs, it shows a `git diff` and asks
+before overwriting. `--force` skips those questions. A piped stdin is refused,
+so `node install.mjs --interactive < answers.txt` does not answer for you.
 
 Already cloned without submodules? Run `git submodule update --init --recursive`.
 
@@ -155,7 +161,12 @@ Pin only what you need. Every pinned model is one more line that goes stale when
 | `reviewer` | Correctness, tests, maintainability, security |
 | `debugger` | Failing tests, crashes, production issues |
 | `refactorer` | Clarity and duplication |
-| `dream-deep`, `dream-light` | Nightly memory passes |
+| `architecture-consultant` | Architecture consultation, read-only |
+| `multimodal-looker` | Image, PDF, and diagram interpretation |
+
+The dream agents (`dream-light`, `dream-deep`) ship with
+`@vasilvestre/opencode-dream-memory`, not here, because that plugin pins the
+model each nightly pass uses.
 
 Set the primary one:
 
@@ -164,6 +175,9 @@ Set the primary one:
   "default_agent": "orchestrator"
 }
 ```
+
+The [agents README](agents/README.md#mapping-to-oh-my-openagent) maps each
+agent to its oh-my-openagent counterpart and names the missing ones.
 
 
 ## What this does not replace

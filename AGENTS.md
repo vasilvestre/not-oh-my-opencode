@@ -5,7 +5,7 @@
 
 ## OVERVIEW
 
-A showcase of OpenCode v2 bricks: 11 agents, 6 commands, 5 instruction files,
+A showcase of OpenCode v2 bricks: 12 agents, 6 commands, 5 instruction files,
 and 6 plugins kept as Git submodules. It holds the files that cannot ship as
 npm packages, links the packages that can, and points at them.
 
@@ -13,7 +13,7 @@ npm packages, links the packages that can, and points at them.
 
 ```
 .
-├── agents/            11 agents, plain Markdown with YAML frontmatter
+├── agents/            12 agents, plain Markdown with YAML frontmatter
 ├── commands/          6 slash commands
 ├── instructions/      5 rule files, loaded through opencode.jsonc
 ├── plugins/           6 Git submodules, one per published npm package
@@ -59,9 +59,9 @@ npm packages, links the packages that can, and points at them.
   agents may not.
 - **An installer that rewrites the config.** `install.mjs` links the submodules
   into the config directory and prints the lines to add. It never edits
-  `opencode.jsonc`, never copies agents over yours, and `--dry-run` shows every
-  action first. A script that rewrites the config is exactly what this project
-  refuses to do.
+  `opencode.jsonc`, `--dry-run` shows every action first, and it overwrites one
+  of your files only after you say yes or pass `--force`. A script that rewrites
+  the config is exactly what this project refuses to do.
 - **Moving plugin code into this repository.** Each plugin keeps its own
   repository, its own history, and its own npm release.
 - **A personal path or a secret in a published file.** `check.mjs` fails on
@@ -75,6 +75,7 @@ npm packages, links the packages that can, and points at them.
 
 ```bash
 node check.mjs                  # must print "check: N files clean, M agents described"
+node install.mjs --interactive  # pick plugins, agents and commands one by one
 node install.mjs --dry-run      # show what would be linked, change nothing
 node install.mjs                # link the submodules into ~/.config/opencode/plugins
 git submodule update --init --recursive   # after a clone without --recurse-submodules
