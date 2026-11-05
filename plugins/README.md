@@ -28,7 +28,7 @@ opencode plugin add @vasilvestre/opencode-plain-style
 | `opencode-plain-style` | `@vasilvestre/opencode-plain-style` | 1.3.1 | Injects a plain-language rulebook into every system prompt |
 | `opencode-dream-memory` | `@vasilvestre/opencode-dream-memory` | 0.3.1 | Injects memory that survives compaction |
 | `opencode-comment-checker` | `@vasilvestre/opencode-comment-checker` | 1.0.1 | Flags comments that add nothing after an edit |
-| `opencode-hashline-edit` | `@vasilvestre/opencode-hashline-edit` | 1.1.8 | `LINE#ID` anchors that reject stale edits |
+| `opencode-hashline-edit` | `@vasilvestre/opencode-hashline-edit` | 1.1.9 | `LINE#ID` anchors that reject stale edits |
 | `opencode-tool-guard` | `@vasilvestre/opencode-tool-guard` | 1.0.0 | Escalates a dangerous shell command from allow to ask |
 | `opencode-todo-enforcer` | `@vasilvestre/opencode-todo-enforcer` | 1.0.0 | Resumes an idle session while its todos are open |
 | `opencode-background-resumer` | `@vasilvestre/opencode-background-resumer` | 0.1.2 | Resumes an idle session once its background subagents finish |
