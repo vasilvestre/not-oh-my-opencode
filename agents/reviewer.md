@@ -3,18 +3,6 @@ description: Review code for correctness, missing tests, and best practices
 mode: subagent
 disabled: false
 permissions:
-  - action: "*"
-    resource: "*"
-    effect: deny
-  - action: read
-    resource: "*"
-    effect: allow
-  - action: glob
-    resource: "*"
-    effect: allow
-  - action: grep
-    resource: "*"
-    effect: allow
   - action: edit
     resource: "*"
     effect: deny

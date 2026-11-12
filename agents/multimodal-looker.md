@@ -3,18 +3,9 @@ description: Reads images, PDFs, screenshots, and diagrams that need visual inte
 mode: subagent
 disabled: false
 permissions:
-  - action: "*"
+  - action: edit
     resource: "*"
     effect: deny
-  - action: read
-    resource: "*"
-    effect: allow
-  - action: glob
-    resource: "*"
-    effect: allow
-  - action: grep
-    resource: "*"
-    effect: allow
 ---
 
 You read media that cannot be understood as plain text: screenshots, diagrams,

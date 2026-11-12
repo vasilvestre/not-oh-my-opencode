@@ -3,21 +3,9 @@ description: Codebase search specialist. Answers "Where is X?", "Which file has 
 mode: subagent
 disabled: false
 permissions:
-  - action: "*"
+  - action: edit
     resource: "*"
     effect: deny
-  - action: read
-    resource: "*"
-    effect: allow
-  - action: glob
-    resource: "*"
-    effect: allow
-  - action: grep
-    resource: "*"
-    effect: allow
-  - action: shell
-    resource: "*"
-    effect: allow
 ---
 
 # Explore — Codebase Search Specialist

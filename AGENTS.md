@@ -44,8 +44,10 @@ npm packages, links the packages that can, and points at them.
 - An agent declares `mode: primary` or `mode: subagent`. Every agent must
   declare `mode`; without it OpenCode treats the agent as `primary`, so it
   cannot be delegated to.
-- An agent that must not write declares a `permissions` list: a catch-all
-  `deny` first, then one `allow` per action it needs.
+- An agent declares only what it restricts: a `deny` for a tool it must not
+  use, and an `allow` only to punch a hole in a broader `deny`. Never a
+  catch-all `"*"` deny: it hides every tool added later, including tools the
+  user installs for another purpose.
 - The submodules keep their own `AGENTS.md`. Read the one in
   `plugins/<name>/` before changing a plugin.
 
@@ -56,7 +58,13 @@ npm packages, links the packages that can, and points at them.
   provider renames or retires it, and keeping a matrix of provider chains
   current is the failure mode this project exists to avoid. A user who wants a
   cheap search agent pins that one agent locally. Commands may pin a model;
-  agents may not.
+  agents may not. A model pinned in your own copy under
+  `~/.config/opencode/agents/` is fine: that copy is yours, the repo copy runs
+  on every install.
+- **A catch-all `deny` in an agent file.** An agent states what it forbids,
+  never "everything except this list". The catch-all silently blocks every
+  tool added later: `skill`, `question`, `todowrite`, the MCP servers, the
+  delegation tool. A user who hits it cannot tell which agent stole the tool.
 - **An installer that rewrites the config.** `install.mjs` links the submodules
   into the config directory and prints the lines to add. It never edits
   `opencode.jsonc`, `--dry-run` shows every action first, and it overwrites one
@@ -93,7 +101,10 @@ is the whole test suite.
   the npm package names instead. Both forms work; do not mix them.
 - The example config loads `instructions/git-workflow.md`, but `install.mjs`
   prints only `secrets-and-verification.md`, `remote-ssh.md`, and
-  `workspace-hygiene.md`.
+  `workspace-hygiene.md`. It also prints the `policies` and `permissions`
+  block, because an agent now carries only its own restrictions and the
+  guardrails on `sudo`, `git push` and external directories must live in the
+  user's config.
 - Two commands name an `agent` that does not exist here: `maintain-readme.md`
   uses `tools/doc`, `dream.md` uses `plan`. They fall back to the default agent.
 - `plugins/opencode-hashline-edit/dist/` is build output committed in the

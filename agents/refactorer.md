@@ -2,25 +2,6 @@
 description: Refactor code for clarity, remove duplication, simplify
 mode: subagent
 disabled: false
-permissions:
-  - action: "*"
-    resource: "*"
-    effect: deny
-  - action: read
-    resource: "*"
-    effect: allow
-  - action: glob
-    resource: "*"
-    effect: allow
-  - action: grep
-    resource: "*"
-    effect: allow
-  - action: edit
-    resource: "*"
-    effect: allow
-  - action: shell
-    resource: "*"
-    effect: allow
 ---
 
 You are a refactoring specialist. Make code simpler without changing behavior.

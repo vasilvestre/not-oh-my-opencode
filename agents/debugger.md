@@ -2,25 +2,6 @@
 description: Debug failing tests, crashes, and production issues
 mode: subagent
 disabled: false
-permissions:
-  - action: "*"
-    resource: "*"
-    effect: deny
-  - action: read
-    resource: "*"
-    effect: allow
-  - action: glob
-    resource: "*"
-    effect: allow
-  - action: grep
-    resource: "*"
-    effect: allow
-  - action: shell
-    resource: "*"
-    effect: allow
-  - action: edit
-    resource: "*"
-    effect: allow
 ---
 
 You are a debugging specialist. Your goal: find the root cause fast, fix it, verify.

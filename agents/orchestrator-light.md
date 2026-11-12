@@ -2,28 +2,6 @@
 description: Lightweight orchestrator for simple tasks: intent gate, minimal delegation, task tracking
 mode: primary
 disabled: false
-permissions:
-  - action: "*"
-    resource: "*"
-    effect: deny
-  - action: read
-    resource: "*"
-    effect: allow
-  - action: glob
-    resource: "*"
-    effect: allow
-  - action: grep
-    resource: "*"
-    effect: allow
-  - action: shell
-    resource: "*"
-    effect: allow
-  - action: subagent
-    resource: "*"
-    effect: allow
-  - action: edit
-    resource: "*"
-    effect: allow
 ---
 
 # Orchestrator Light — Intent Gate, Minimal Delegation

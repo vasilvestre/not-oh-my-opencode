@@ -3,21 +3,9 @@ description: Plan features, break down work, create implementation tasks
 mode: subagent
 disabled: false
 permissions:
-  - action: "*"
+  - action: edit
     resource: "*"
     effect: deny
-  - action: read
-    resource: "*"
-    effect: allow
-  - action: glob
-    resource: "*"
-    effect: allow
-  - action: grep
-    resource: "*"
-    effect: allow
-  - action: question
-    resource: "*"
-    effect: allow
   - action: edit
     resource: ".opencode/plan/*"
     effect: allow

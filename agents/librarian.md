@@ -3,29 +3,20 @@ description: External documentation and open-source research specialist. Finds o
 mode: subagent
 disabled: false
 permissions:
-  - action: "*"
+  - action: shell
     resource: "*"
     effect: deny
-  - action: read
-    resource: "*"
+  - action: shell
+    resource: "gh *"
     effect: allow
-  - action: glob
-    resource: "*"
-    effect: allow
-  - action: grep
-    resource: "*"
+  - action: shell
+    resource: "git *"
     effect: allow
   - action: webfetch
     resource: "*"
     effect: allow
   - action: websearch
     resource: "*"
-    effect: allow
-  - action: shell
-    resource: "gh *"
-    effect: allow
-  - action: shell
-    resource: "git *"
     effect: allow
 ---
 

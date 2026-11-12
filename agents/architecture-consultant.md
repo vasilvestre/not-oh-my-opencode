@@ -3,18 +3,12 @@ description: Read-only architecture consultant. Answers design tradeoffs, unfami
 mode: subagent
 disabled: false
 permissions:
-  - action: "*"
+  - action: edit
     resource: "*"
     effect: deny
-  - action: read
+  - action: shell
     resource: "*"
-    effect: allow
-  - action: glob
-    resource: "*"
-    effect: allow
-  - action: grep
-    resource: "*"
-    effect: allow
+    effect: deny
 ---
 
 You are a senior consultant. Someone brings you a question they cannot settle

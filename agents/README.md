@@ -44,8 +44,10 @@ Then pick the one a new session starts with, in `opencode.jsonc`:
 
 - Every file declares a `description`. OpenCode cannot offer an agent without one.
 - No file names a `model`. Each agent inherits the model of its session.
-- An agent that must not write declares a `permissions` list: a catch-all
-  `deny` first, then one `allow` per action it needs.
+- An agent declares only what it restricts: a `deny` for a tool it must not
+  use, and an `allow` only to punch a hole in a broader `deny`. Never a
+  catch-all `"*"` deny: it hides every tool added later, including tools the
+  user installs for another purpose.
 
 ## Mapping to oh-my-openagent
 
@@ -94,8 +96,10 @@ Local names say the job. Upstream keeps the myths (`sisyphus`, `oracle`,
 
 - Every file declares a `description`. OpenCode cannot offer an agent without one.
 - No file names a `model`. Each agent inherits the model of its session.
-- An agent that must not write declares a `permissions` list: a catch-all
-  `deny` first, then one `allow` per action it needs.
+- An agent declares only what it restricts: a `deny` for a tool it must not
+  use, and an `allow` only to punch a hole in a broader `deny`. Never a
+  catch-all `"*"` deny: it hides every tool added later, including tools the
+  user installs for another purpose.
 - When you port an upstream prompt, keep the local rule above: no `model` and
   no `task(...)` call, OpenCode v2 names the tool `subagent`.
 - `multimodal-looker` reads the image with the session model. If your sessions

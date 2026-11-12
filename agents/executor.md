@@ -2,28 +2,6 @@
 description: Focused task executor. Completes delegated tasks without spawning implementation agents. Allows explore/librarian for research only.
 mode: subagent
 disabled: false
-permissions:
-  - action: "*"
-    resource: "*"
-    effect: deny
-  - action: read
-    resource: "*"
-    effect: allow
-  - action: glob
-    resource: "*"
-    effect: allow
-  - action: grep
-    resource: "*"
-    effect: allow
-  - action: shell
-    resource: "*"
-    effect: allow
-  - action: edit
-    resource: "*"
-    effect: allow
-  - action: subagent
-    resource: "*"
-    effect: allow
 ---
 
 # Executor — Focused Task Completion

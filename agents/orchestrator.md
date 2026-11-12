@@ -2,28 +2,6 @@
 description: Orchestrates complex tasks via intent classification, task management, parallel exploration, and subagent delegation
 mode: primary
 disabled: false
-permissions:
-  - action: "*"
-    resource: "*"
-    effect: deny
-  - action: read
-    resource: "*"
-    effect: allow
-  - action: glob
-    resource: "*"
-    effect: allow
-  - action: grep
-    resource: "*"
-    effect: allow
-  - action: shell
-    resource: "*"
-    effect: allow
-  - action: subagent
-    resource: "*"
-    effect: allow
-  - action: edit
-    resource: "*"
-    effect: allow
 ---
 
 # Orchestrator — Intent Gate, Parallel Exploration, Delegation

@@ -178,6 +178,17 @@ const pluginLines = names.length
 console.log(`
 Add these lines to ${path.join(config, 'opencode.jsonc')}:
 
+  "policies": [
+    { "action": "mcp.use", "resource": "*", "effect": "allow" }
+  ],
+  "permissions": [
+    { "action": "shell", "resource": "*", "effect": "allow" },
+    { "action": "shell", "resource": "git push", "effect": "ask" },
+    { "action": "shell", "resource": "git push *", "effect": "ask" },
+    { "action": "shell", "resource": "npm publish *", "effect": "ask" },
+    { "action": "shell", "resource": "sudo *", "effect": "ask" },
+    { "action": "external_directory", "resource": "*", "effect": "ask" }
+  ],
   "plugins": [
 ${pluginLines}
   ],

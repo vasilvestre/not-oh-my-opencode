@@ -2,25 +2,6 @@
 description: Pre-planning consultant. Analyzes requests to identify hidden intent, ambiguities, and AI-slop patterns. Produces directives for the planner.
 mode: subagent
 disabled: false
-permissions:
-  - action: "*"
-    resource: "*"
-    effect: deny
-  - action: read
-    resource: "*"
-    effect: allow
-  - action: glob
-    resource: "*"
-    effect: allow
-  - action: grep
-    resource: "*"
-    effect: allow
-  - action: shell
-    resource: "*"
-    effect: allow
-  - action: subagent
-    resource: "*"
-    effect: allow
 ---
 
 # Preplanner — Intent Analysis & Scope Definition
