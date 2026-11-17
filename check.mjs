@@ -21,13 +21,39 @@ const files = DIRS.flatMap((dir) =>
   fs.readdirSync(path.join(ROOT, dir)).map((f) => path.join(dir, f)),
 )
 
+// A skill is a whole directory: SKILL.md, references, scripts. Every file in it
+// ships, so every file is checked.
+const skillNames = fs
+  .readdirSync(path.join(ROOT, 'skills'), { withFileTypes: true })
+  .filter((e) => e.isDirectory())
+  .map((e) => e.name)
+
+function walk(dir) {
+  return fs
+    .readdirSync(path.join(ROOT, dir), { withFileTypes: true })
+    .filter((e) => e.name !== '__pycache__')
+    .flatMap((e) => (e.isDirectory() ? walk(path.join(dir, e.name)) : [path.join(dir, e.name)]))
+}
+
+const skillFiles = skillNames.flatMap((name) => walk(path.join('skills', name)))
+
 assert.ok(files.length >= 20, `expected at least 20 files, found ${files.length}`)
 
-for (const rel of files) {
+for (const rel of [...files, ...skillFiles]) {
   const text = fs.readFileSync(path.join(ROOT, rel), 'utf8')
   for (const { name, re } of FORBIDDEN) {
     assert.equal(re.test(text), false, `${rel} contains a ${name}`)
   }
+}
+
+// OpenCode offers a skill by its frontmatter name, not by its folder. A mismatch
+// between the two is invisible until the skill refuses to load.
+for (const name of skillNames) {
+  const text = fs.readFileSync(path.join(ROOT, 'skills', name, 'SKILL.md'), 'utf8')
+  const front = text.match(/^---\n[\s\S]*?\n---/)?.[0] ?? ''
+  const declared = front.match(/^name:\s*(\S+)$/m)?.[1]
+  assert.equal(declared, name, `skills/${name}/SKILL.md declares name: ${declared}`)
+  assert.match(front, /^description:\s*\S/m, `skills/${name}/SKILL.md has no description`)
 }
 
 // Every agent must declare a description, or OpenCode cannot offer it.
@@ -68,4 +94,6 @@ const piped = spawnSync(process.execPath, [path.join(ROOT, 'install.mjs'), '--in
 assert.equal(piped.status, 1, '--interactive accepted a piped stdin')
 assert.match(piped.stderr, /needs a terminal/)
 
-console.log(`check: ${files.length} files clean, ${agents.length} agents described`)
+console.log(
+  `check: ${files.length} files clean, ${agents.length} agents described, ${skillNames.length} skills valid`,
+)

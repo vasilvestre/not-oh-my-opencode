@@ -6,8 +6,8 @@
 ## OVERVIEW
 
 A showcase of OpenCode v2 bricks: 12 agents, 6 commands, 5 instruction files,
-and 6 plugins kept as Git submodules. It holds the files that cannot ship as
-npm packages, links the packages that can, and points at them.
+5 skills, and 6 plugins kept as Git submodules. It holds the files that cannot
+ship as npm packages, links the packages that can, and points at them.
 
 ## STRUCTURE
 
@@ -16,6 +16,7 @@ npm packages, links the packages that can, and points at them.
 ├── agents/            12 agents, plain Markdown with YAML frontmatter
 ├── commands/          6 slash commands
 ├── instructions/      5 rule files, loaded through opencode.jsonc
+├── skills/            5 skills, one directory each, linked into the config
 ├── plugins/           6 Git submodules, one per published npm package
 ├── install.mjs        links the submodules into a config directory
 ├── check.mjs          the only test in the repository
@@ -28,6 +29,7 @@ npm packages, links the packages that can, and points at them.
 | --- | --- | --- |
 | Add or change an agent | `agents/*.md` | Frontmatter needs a `description`, and no `model` |
 | Add a slash command | `commands/*.md` | Frontmatter: `description`, optional `agent` or `model` |
+| Add or change a skill | `skills/<name>/SKILL.md` | Frontmatter `name` must equal the directory name |
 | Add a rule every session reads | `instructions/*.md` | Then list it under `instructions` in the config |
 | Read a folder's install steps | `*/README.md` | One per folder, linked from the root README |
 | Maintain the root README | `commands/maintain-readme.md` | The `/maintain-readme` command |
@@ -82,10 +84,10 @@ npm packages, links the packages that can, and points at them.
 ## COMMANDS
 
 ```bash
-node check.mjs                  # must print "check: N files clean, M agents described"
-node install.mjs --interactive  # pick plugins, agents and commands one by one
+node check.mjs                  # must print "check: N files clean, M agents described, K skills valid"
+node install.mjs --interactive  # pick plugins, skills, agents and commands one by one
 node install.mjs --dry-run      # show what would be linked, change nothing
-node install.mjs                # link the submodules into ~/.config/opencode/plugins
+node install.mjs                # link plugins and skills into ~/.config/opencode/
 git submodule update --init --recursive   # after a clone without --recurse-submodules
 ```
 
@@ -96,6 +98,8 @@ is the whole test suite.
 
 - `install.mjs` only links. It never runs `npm install` nor `npm run build`,
   because `plugins/opencode-hashline-edit/dist/` is committed.
+- A skill folder ships as a whole. Anything you leave in `skills/<name>/` gets
+  published with it, so keep notes and scratch files out of it.
 - `install.mjs` prints `./plugins/<name>` as the config value, because it
   creates symlinks inside the config directory. `opencode.example.jsonc` lists
   the npm package names instead. Both forms work; do not mix them.

@@ -35,7 +35,7 @@ Each is an npm package you add to `plugins` in `opencode.jsonc`.
 | [`@vasilvestre/opencode-lsp-suggest`](https://github.com/vasilvestre/opencode-lsp-suggest) | Tells the agent when a language server is missing, quiet when OpenCode already runs one | unpublished |
 | [`@vasilvestre/opencode-php-lsp`](https://github.com/vasilvestre/opencode-php-lsp) | PHP and Twig diagnostics, definition, references and hover, from intelephense and Symfony Language Tools | published |
 
-### Agents, commands, instructions
+### Agents, commands, instructions, skills
 
 These are files, not packages. OpenCode reads them from your config directory, so copy the ones you want.
 
@@ -43,7 +43,11 @@ These are files, not packages. OpenCode reads them from your config directory, s
 agents/        12 agents (orchestrator, explore, librarian, reviewer, ...)
 commands/      6 slash commands
 instructions/  5 instruction files (secrets, remote SSH, workspace hygiene, Atlassian, git)
+skills/        5 skills, each a directory with a SKILL.md
 ```
+
+The skills are forks of the ones in `oh-my-openagent`, rewritten for OpenCode v2
+and tested here. See [skills/README.md](skills/README.md) for the tool mapping.
 
 ## Install from this repository
 
@@ -55,15 +59,16 @@ cd not-oh-my-opencode
 node install.mjs
 ```
 
-The script does two things:
+The script does three things:
 
 1. It links each submodule into `~/.config/opencode/plugins/`.
-2. It prints the `plugins` and `instructions` lines to add to your config, and the `cp` commands for agents and commands.
+2. It links each skill into `~/.config/opencode/skills/`.
+3. It prints the `plugins` and `instructions` lines to add to your config, and the `cp` commands for agents and commands.
 
 Options:
 
 ```sh
-node install.mjs --interactive             # choose plugins, agents and commands one by one
+node install.mjs --interactive             # choose plugins, skills, agents and commands one by one
 node install.mjs --dry-run                 # show what it would link, change nothing
 node install.mjs --config /path/to/opencode  # use another config directory
 ```
@@ -113,6 +118,7 @@ Each folder has its own README with the details:
 | `commands/` | [commands/README.md](commands/README.md) |
 | `instructions/` | [instructions/README.md](instructions/README.md) |
 | `plugins/` | [plugins/README.md](plugins/README.md) |
+| `skills/` | [skills/README.md](skills/README.md) |
 
 The `mkdir -p` line is not optional: `cp` fails when the target folder does not
 exist, and OpenCode does not create it for you.

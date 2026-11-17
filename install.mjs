@@ -18,6 +18,7 @@ const config = path.resolve(
   configIndex === -1 ? path.join(os.homedir(), '.config', 'opencode') : argv[configIndex + 1],
 )
 const pluginsDir = path.join(config, 'plugins')
+const skillsDir = path.join(config, 'skills')
 const agentsDir = path.join(config, 'agents')
 const commandsDir = path.join(config, 'commands')
 
@@ -38,6 +39,14 @@ const plugins = fs
     const pkg = JSON.parse(fs.readFileSync(path.join(dir, 'package.json'), 'utf8'))
     return { name, dir, pkg }
   })
+
+// Skills are directories holding a SKILL.md. OpenCode v2 discovers them in the
+// config `skills` directory, so a symlink is enough.
+const skills = fs
+  .readdirSync(path.join(ROOT, 'skills'), { withFileTypes: true })
+  .filter((e) => e.isDirectory())
+  .map((e) => ({ name: e.name, dir: path.join(ROOT, 'skills', e.name) }))
+  .filter((s) => fs.existsSync(path.join(s.dir, 'SKILL.md')))
 
 // Agents and commands are Markdown files whose frontmatter holds a description.
 function markdownFiles(dir, target) {
@@ -90,8 +99,8 @@ async function pick(label, items) {
   return chosen
 }
 
-async function linkPlugin(p) {
-  const link = path.join(pluginsDir, p.name)
+async function linkItem(parent, p) {
+  const link = path.join(parent, p.name)
   const stat = fs.lstatSync(link, { throwIfNoEntry: false })
   const current = stat
     ? stat.isSymbolicLink()
@@ -112,7 +121,7 @@ async function linkPlugin(p) {
     console.log(`would link ${link} -> ${p.dir}`)
     return `would link ${p.name}`
   }
-  fs.mkdirSync(pluginsDir, { recursive: true })
+  fs.mkdirSync(parent, { recursive: true })
   fs.rmSync(link, { force: true, recursive: true })
   fs.symlinkSync(p.dir, link, 'dir')
   console.log(`linked ${link} -> ${p.dir}`)
@@ -152,12 +161,14 @@ let selected = plugins
 
 if (interactive) {
   const chosenPlugins = await pick('Plugin', plugins)
+  const chosenSkills = await pick('Skill', skills)
   const chosenAgents = await pick('Agent', agents)
   const chosenCommands = await pick('Command', commands)
 
   selected = chosenPlugins
   const summary = []
-  for (const p of chosenPlugins) summary.push(await linkPlugin(p))
+  for (const p of chosenPlugins) summary.push(await linkItem(pluginsDir, p))
+  for (const s of chosenSkills) summary.push(await linkItem(skillsDir, s))
   for (const item of [...chosenAgents, ...chosenCommands]) summary.push(await copyMarkdown(item))
   rl.close()
   console.log(`\n${summary.length} selected: ${summary.join(', ')}`)
@@ -168,6 +179,13 @@ if (interactive) {
     if (!dryRun) fs.rmSync(link, { force: true, recursive: true })
     if (!dryRun) fs.symlinkSync(p.dir, link, 'dir')
     console.log(`${dryRun ? 'would link' : 'linked'} ${link} -> ${p.dir}`)
+  }
+  if (!dryRun) fs.mkdirSync(skillsDir, { recursive: true })
+  for (const s of skills) {
+    const link = path.join(skillsDir, s.name)
+    if (!dryRun) fs.rmSync(link, { force: true, recursive: true })
+    if (!dryRun) fs.symlinkSync(s.dir, link, 'dir')
+    console.log(`${dryRun ? 'would link' : 'linked'} ${link} -> ${s.dir}`)
   }
 }
 
