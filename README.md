@@ -61,6 +61,10 @@ npx skills check    # list what moved upstream
 npx skills update   # apply it
 ```
 
+The same content is published as one page at
+<https://vasilvestre.github.io/not-oh-my-opencode/>. It is generated from this
+repository by `site/build.mjs`, so it cannot fall behind.
+
 ## Install from this repository
 
 Requirements: Node.js 20 or later, Git, and an OpenCode config directory.

@@ -17,6 +17,7 @@ ship as npm packages, links the packages that can, and points at them.
 ├── commands/          6 slash commands
 ├── instructions/      5 rule files, loaded through opencode.jsonc
 ├── skills/            6 skills, one directory each, installed by the skills.sh CLI
+├── site/              one generated page, published on GitHub Pages
 ├── plugins/           6 Git submodules, one per published npm package
 ├── install.mjs        links the submodules into a config directory
 ├── check.mjs          the only test in the repository
@@ -33,6 +34,7 @@ ship as npm packages, links the packages that can, and points at them.
 | Add a rule every session reads | `instructions/*.md` | Then list it under `instructions` in the config |
 | Read a folder's install steps | `*/README.md` | One per folder, linked from the root README |
 | Maintain the root README | `commands/maintain-readme.md` | The `/maintain-readme` command |
+| Change the published page | `site/build.mjs` | Generates it from this repository, no content of its own |
 | Change what the installer does | `install.mjs` | It writes only inside the config directory |
 | Change a plugin | Its own repository | The submodule stays a submodule |
 | See the commit style | `git log -n 5` | Conventional Commits, see `instructions/git-workflow.md` |
@@ -85,6 +87,7 @@ ship as npm packages, links the packages that can, and points at them.
 
 ```bash
 node check.mjs                  # must print "check: N files clean, M agents described, K skills valid"
+node site/build.mjs             # regenerate site/dist/index.html from the repository
 node install.mjs --interactive  # pick plugins, agents and commands one by one
 node install.mjs --dry-run      # show what would be linked, change nothing
 node install.mjs                # link the plugins into ~/.config/opencode/plugins
