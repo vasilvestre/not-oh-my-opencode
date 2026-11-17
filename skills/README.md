@@ -33,6 +33,20 @@ files instead of links.
 A skill needs no entry in `opencode.jsonc`. The agent discovers it from the
 directory, and reloads it when the file changes.
 
+## Licensing
+
+These are not all the same license.
+
+- `ast-grep` is MIT, vendored from `code-yeongyu/ast-grep-skill` at commit
+  `3148c69`. Its `LICENSE` and `SOURCE` travel with it.
+- `debugging`, `git-master`, `init-deep`, `coding-agent-sessions` and
+  `remove-ai-slops` are modified copies of work by Yeongyu Kim, taken from
+  `oh-my-openagent` 5.1.75. Upstream releases them under the Sustainable Use
+  License 1.0, so each directory carries that text in `LICENSE`, headed by the
+  notice that this copy is modified. Public redistribution is allowed because
+  it is free of charge; selling them, or bundling them into a paid product, is
+  not.
+
 ## What changed from upstream
 
 These are forks of the skills shipped in

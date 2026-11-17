@@ -212,4 +212,10 @@ Some of these are on the roadmap. Some are deliberately left out because a promp
 
 ## License
 
-MIT.
+MIT for the harness itself: the scripts, and the agents, commands and
+instruction files.
+
+The skills are not all MIT. `ast-grep` is MIT under its own `LICENSE`. The five
+forks of `oh-my-openagent` keep the upstream Sustainable Use License, copied
+into each skill directory with the modification notice. The plugins under
+`plugins/` are separate repositories, each with its own license.
