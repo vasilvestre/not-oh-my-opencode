@@ -1,6 +1,6 @@
 # Skills
 
-[![skills.sh](https://skills.sh/b/vasilvestre/not-oh-my-opencode)](https://skills.sh/vasilvestre/not-oh-my-opencode)
+[![skills.sh](https://img.shields.io/badge/skills.sh-6_skills-blue)](https://skills.sh/vasilvestre/not-oh-my-opencode)
 
 Six skills, each one a directory with a `SKILL.md` and the files it needs.
 They install through the [skills.sh](https://skills.sh/vasilvestre/not-oh-my-opencode)

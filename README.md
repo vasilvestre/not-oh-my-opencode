@@ -2,7 +2,7 @@
 
 A harness on a harness, built for OpenCode v2, that works.
 
-[![skills.sh](https://skills.sh/b/vasilvestre/not-oh-my-opencode)](https://skills.sh/vasilvestre/not-oh-my-opencode)
+[![skills.sh](https://img.shields.io/badge/skills.sh-6_skills-blue)](https://skills.sh/vasilvestre/not-oh-my-opencode)
 
 Each plugin lives in its own repository, linked here as a Git submodule under `plugins/`. Every one publishes alone on npm. `install.mjs` links the submodules into your OpenCode config directory, so you can run the latest code without waiting for a release.
 
