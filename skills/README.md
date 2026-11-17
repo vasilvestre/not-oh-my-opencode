@@ -1,8 +1,11 @@
 # Skills
 
+[![skills.sh](https://skills.sh/b/vasilvestre/not-oh-my-opencode)](https://skills.sh/vasilvestre/not-oh-my-opencode)
+
 Six skills, each one a directory with a `SKILL.md` and the files it needs.
-OpenCode v2 reads them from the `skills` directory of your config, so
-`install.mjs` links each one there.
+They install through the [skills.sh](https://skills.sh/vasilvestre/not-oh-my-opencode)
+CLI, which writes into `~/.agents/skills/` and links them for every agent it
+knows.
 
 | Skill | What it does |
 | --- | --- |
@@ -16,12 +19,18 @@ OpenCode v2 reads them from the `skills` directory of your config, so
 ## Install
 
 ```sh
-node install.mjs                    # link every skill into ~/.config/opencode/skills/
-node install.mjs --interactive      # pick them one by one
-node install.mjs --dry-run          # show what would be linked
+npx skills add vasilvestre/not-oh-my-opencode -g -a opencode --skill "*"   # all six, global
+npx skills add vasilvestre/not-oh-my-opencode -g -a claude-code --skill "*"  # another agent
+npx skills check                     # list what moved upstream
+npx skills update                    # apply it
+npx skills remove --all              # uninstall
 ```
 
-A skill needs no entry in `opencode.jsonc`. OpenCode discovers it from the
+Pin a tag when you want a fixed version: append `@v1.0.0` to the source.
+`install.mjs` does not install skills; pass `--copy` to the CLI if you want
+files instead of links.
+
+A skill needs no entry in `opencode.jsonc`. The agent discovers it from the
 directory, and reloads it when the file changes.
 
 ## What changed from upstream
@@ -62,7 +71,7 @@ service. For OpenCode it reads `session_v2` and `session_message` from
 `$(opencode db path)`.
 
 ```sh
-cd ~/.config/opencode/skills/coding-agent-sessions
+cd ~/.agents/skills/coding-agent-sessions
 python3 -B scripts/find-agent-sessions.py list --limit 5
 python3 -B scripts/find-agent-sessions.py find --query "deploy" --from 7d
 python3 -B scripts/find-agent-sessions.py read <session-id> --platform opencode

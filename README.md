@@ -2,6 +2,8 @@
 
 A harness on a harness, built for OpenCode v2, that works.
 
+[![skills.sh](https://skills.sh/b/vasilvestre/not-oh-my-opencode)](https://skills.sh/vasilvestre/not-oh-my-opencode)
+
 Each plugin lives in its own repository, linked here as a Git submodule under `plugins/`. Every one publishes alone on npm. `install.mjs` links the submodules into your OpenCode config directory, so you can run the latest code without waiting for a release.
 
 The script writes only inside your config directory. It never edits `opencode.jsonc`, and it replaces one of your own agents only when you say yes.
@@ -49,6 +51,16 @@ skills/        6 skills, each a directory with a SKILL.md
 The skills are forks of the ones in `oh-my-openagent`, rewritten for OpenCode v2
 and tested here. See [skills/README.md](skills/README.md) for the tool mapping.
 
+They install through the [skills.sh](https://skills.sh/vasilvestre/not-oh-my-opencode)
+CLI, not through `install.mjs`, so one command serves OpenCode, Claude Code,
+Codex and the rest:
+
+```sh
+npx skills add vasilvestre/not-oh-my-opencode -g -a opencode --skill "*"
+npx skills check    # list what moved upstream
+npx skills update   # apply it
+```
+
 ## Install from this repository
 
 Requirements: Node.js 20 or later, Git, and an OpenCode config directory.
@@ -59,16 +71,15 @@ cd not-oh-my-opencode
 node install.mjs
 ```
 
-The script does three things:
+The script does two things:
 
 1. It links each submodule into `~/.config/opencode/plugins/`.
-2. It links each skill into `~/.config/opencode/skills/`.
-3. It prints the `plugins` and `instructions` lines to add to your config, and the `cp` commands for agents and commands.
+2. It prints the `plugins` and `instructions` lines to add to your config, the `cp` commands for agents and commands, and the `npx skills add` command for skills.
 
 Options:
 
 ```sh
-node install.mjs --interactive             # choose plugins, skills, agents and commands one by one
+node install.mjs --interactive             # choose plugins, agents and commands one by one
 node install.mjs --dry-run                 # show what it would link, change nothing
 node install.mjs --config /path/to/opencode  # use another config directory
 ```

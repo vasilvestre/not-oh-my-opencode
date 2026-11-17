@@ -16,7 +16,7 @@ ship as npm packages, links the packages that can, and points at them.
 ├── agents/            12 agents, plain Markdown with YAML frontmatter
 ├── commands/          6 slash commands
 ├── instructions/      5 rule files, loaded through opencode.jsonc
-├── skills/            6 skills, one directory each, linked into the config
+├── skills/            6 skills, one directory each, installed by the skills.sh CLI
 ├── plugins/           6 Git submodules, one per published npm package
 ├── install.mjs        links the submodules into a config directory
 ├── check.mjs          the only test in the repository
@@ -85,9 +85,10 @@ ship as npm packages, links the packages that can, and points at them.
 
 ```bash
 node check.mjs                  # must print "check: N files clean, M agents described, K skills valid"
-node install.mjs --interactive  # pick plugins, skills, agents and commands one by one
+node install.mjs --interactive  # pick plugins, agents and commands one by one
 node install.mjs --dry-run      # show what would be linked, change nothing
-node install.mjs                # link plugins and skills into ~/.config/opencode/
+node install.mjs                # link the plugins into ~/.config/opencode/plugins
+npx skills add vasilvestre/not-oh-my-opencode -g -a opencode --skill "*"   # the skills
 git submodule update --init --recursive   # after a clone without --recurse-submodules
 ```
 
@@ -100,6 +101,9 @@ is the whole test suite.
   because `plugins/opencode-hashline-edit/dist/` is committed.
 - A skill folder ships as a whole. Anything you leave in `skills/<name>/` gets
   published with it, so keep notes and scratch files out of it.
+- `install.mjs` does not install skills: the skills.sh CLI owns that, and it
+  copies into `~/.agents/skills/`, which OpenCode reads. A local edit reaches
+  your machine only after `git push` and `npx skills update`.
 - `install.mjs` prints `./plugins/<name>` as the config value, because it
   creates symlinks inside the config directory. `opencode.example.jsonc` lists
   the npm package names instead. Both forms work; do not mix them.
