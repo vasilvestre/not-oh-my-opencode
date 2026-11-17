@@ -6,7 +6,7 @@
 ## OVERVIEW
 
 A showcase of OpenCode v2 bricks: 12 agents, 6 commands, 5 instruction files,
-5 skills, and 6 plugins kept as Git submodules. It holds the files that cannot
+6 skills, and 6 plugins kept as Git submodules. It holds the files that cannot
 ship as npm packages, links the packages that can, and points at them.
 
 ## STRUCTURE
@@ -16,7 +16,7 @@ ship as npm packages, links the packages that can, and points at them.
 ├── agents/            12 agents, plain Markdown with YAML frontmatter
 ├── commands/          6 slash commands
 ├── instructions/      5 rule files, loaded through opencode.jsonc
-├── skills/            5 skills, one directory each, linked into the config
+├── skills/            6 skills, one directory each, linked into the config
 ├── plugins/           6 Git submodules, one per published npm package
 ├── install.mjs        links the submodules into a config directory
 ├── check.mjs          the only test in the repository

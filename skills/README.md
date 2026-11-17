@@ -1,6 +1,6 @@
 # Skills
 
-Five skills, each one a directory with a `SKILL.md` and the files it needs.
+Six skills, each one a directory with a `SKILL.md` and the files it needs.
 OpenCode v2 reads them from the `skills` directory of your config, so
 `install.mjs` links each one there.
 
@@ -10,6 +10,7 @@ OpenCode v2 reads them from the `skills` directory of your config, so
 | [`coding-agent-sessions`](coding-agent-sessions/SKILL.md) | Finds and reads past agent sessions on this machine, across 20+ tools |
 | [`debugging`](debugging/SKILL.md) | Hypothesis-driven debugging loop, locked by a failing test |
 | [`git-master`](git-master/SKILL.md) | Atomic commits, rebase, squash, and history search |
+| [`init-deep`](init-deep/SKILL.md) | Builds a hierarchical `AGENTS.md` knowledge base, one file per directory |
 | [`remove-ai-slops`](remove-ai-slops/SKILL.md) | Cuts AI code smells and junk tests from a branch, each proven before the cut |
 
 ## Install

@@ -43,7 +43,7 @@ These are files, not packages. OpenCode reads them from your config directory, s
 agents/        12 agents (orchestrator, explore, librarian, reviewer, ...)
 commands/      6 slash commands
 instructions/  5 instruction files (secrets, remote SSH, workspace hygiene, Atlassian, git)
-skills/        5 skills, each a directory with a SKILL.md
+skills/        6 skills, each a directory with a SKILL.md
 ```
 
 The skills are forks of the ones in `oh-my-openagent`, rewritten for OpenCode v2
